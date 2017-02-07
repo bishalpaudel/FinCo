@@ -2,14 +2,20 @@ package FW.Model.Accounts;
 
 import FW.Transaction.IEntry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by bishal on 2/6/17.
+ * Created by Akash on 2/7/2017.
  */
-public class DefaultAccount implements IAccount{
+public class Account implements  IAccount {
+
     private String accountNumber;
     private String abbreviation = "DEF";
+
+    private Double interest = 0.0;
+
+    private List<IEntry> entries = new ArrayList<IEntry>();
 
     public String getAccountNumber() {
         return accountNumber;
@@ -27,26 +33,34 @@ public class DefaultAccount implements IAccount{
         return 0.0;
     }
 
-    public Boolean withdraw(IEntry entry) {
+    public Boolean withdraw(IEntry withdraw) {
 
-        return false;
+
+        // Update the logic to withdraw
+        entries.add(withdraw);
+        return true;
     }
 
     public Boolean deposit(IEntry deposit) {
-        return false;
+
+        entries.add(deposit);
+        return true;
     }
 
     public Boolean addInterest(Double interestAmt) {
-        return false;
+        interest = interestAmt;
+        // Update logic to update new interest
+        return true;
     }
 
     public Boolean addEntry(IEntry entry)
     {
-        return false;
+        entries.add(entry);
+        return true;
     }
 
     public List<IEntry> getEntries()
     {
-        return null;
+        return entries;
     }
 }

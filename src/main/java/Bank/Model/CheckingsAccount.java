@@ -1,11 +1,17 @@
 package Bank.Model;
 
 import FW.Model.Accounts.IAccount;
+import FW.Transaction.IEntry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bishal on 2/6/17.
  */
 public class CheckingsAccount implements IAccount{
+
+    private List<IEntry> entries = new ArrayList<IEntry>();
     public String getAccountNumber() {
         return null;
     }
@@ -21,4 +27,37 @@ public class CheckingsAccount implements IAccount{
     public String getAbbreviation() {
         return "Checking";
     }
+
+    public Boolean withdraw(IEntry withdraw) {
+
+
+        // Update the logic to withdraw
+        entries.add(withdraw);
+        return true;
+    }
+
+    public Boolean deposit(IEntry deposit) {
+
+        entries.add(deposit);
+        return true;
+    }
+
+    public Boolean addInterest(Double interestAmt) {
+        interest = interestAmt;
+        // Update logic to update new interest
+        return true;
+    }
+
+    public Boolean addEntry(IEntry entry)
+    {
+        entries.add(entry);
+        return true;
+    }
+
+    public List<IEntry> getEntries()
+    {
+        return entries;
+    }
+
+    private Double interest = 0.0;
 }
