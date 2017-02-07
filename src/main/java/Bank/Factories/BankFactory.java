@@ -7,16 +7,14 @@ import FW.Model.Customer.ICustomer;
 import Bank.Model.SavingsAccount;
 import FW.Factories.AbstractFactory;
 import FW.Model.Customer.Person;
+import FW.Types.CustomerType;
 
 /**
  * Created by bishal on 2/6/17.
  */
 public class BankFactory implements AbstractFactory {
-    public ICustomer getParty(String type) {
-        if(type == "company")
-            return new Company();
-        else if(type == "person")
-            return new Person();
+
+    public ICustomer getParty(CustomerType type) {
         return null;
     }
 
