@@ -2,7 +2,9 @@ package FW;
 
 import FW.Controllers.Controller;
 import FW.Controllers.CustomerController;
+import FW.Factories.AbstractFactory;
 import FW.Functors.ActionListeners.AddCompanyButtonClicked;
+import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Model.Customer.IPerson;
 import FW.Model.Customer.Person;
@@ -105,9 +107,9 @@ public class FinCo extends JFrame{
     }
 
 
-//    public void setAccountFactory(AbstractFactory factory) {
-//        factory = factory;
-//    }
+    public void setFactory(AbstractFactory factory) {
+        InstanceManager.setFactoryInstance(factory);
+    }
     /*****************************************************
      * The entry point for this application.
      * Sets the Look and Feel to the System Look and Feel.
@@ -316,6 +318,11 @@ public class FinCo extends JFrame{
     {
         JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 
+    }
+
+    public void addAccount(ICustomer customer, IAccount account){
+        customer.addAccount(account);
+        InstanceManager.getDAO().add
     }
 
 }
