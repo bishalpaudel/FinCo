@@ -3,13 +3,15 @@ package FW.Functors.ActionListeners;
 import FW.JDialog_AddCompAcc;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by bishal on 2/6/17.
  */
-public class AddCompanyButton implements java.awt.event.ActionListener {
+public class AddCompanyButtonClicked implements java.awt.event.ActionListener {
     public void actionPerformed(ActionEvent event) {
-//        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+
+//        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(this);
 //        pac.setBounds(450, 20, 300, 330);
 //        pac.show();
 //
@@ -26,4 +28,11 @@ public class AddCompanyButton implements java.awt.event.ActionListener {
 //            newaccount=false;
 //        }
     }
+
+//    public void setData(Object object){
+//        IAccount account = Singleton.getFactory().getAccount("savings");
+//        ICustomer customer = Singleton.getFactory().getCustomer("company");
+//        ...
+//        Singleton.getController().addAccount(customer, account);
+//    }
 }

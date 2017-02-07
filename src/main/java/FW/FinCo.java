@@ -2,6 +2,7 @@ package FW;
 
 import FW.Controllers.Controller;
 import FW.Controllers.CustomerController;
+import FW.Functors.ActionListeners.AddCompanyButtonClicked;
 import FW.Model.Customer.ICustomer;
 import FW.Model.Customer.IPerson;
 import FW.Model.Customer.Person;
@@ -105,7 +106,7 @@ public class FinCo extends JFrame{
         FinCo.SymAction lSymAction = new FinCo.SymAction();
         JButton_Exit.addActionListener(lSymAction);
         JButton_PerAC.addActionListener(lSymAction);
-        JButton_CompAC.addActionListener(lSymAction);
+        JButton_CompAC.addActionListener(new AddCompanyButtonClicked());
         JButton_Deposit.addActionListener(lSymAction);
         JButton_Withdraw.addActionListener(lSymAction);
         JButton_Addinterest.addActionListener(lSymAction);
