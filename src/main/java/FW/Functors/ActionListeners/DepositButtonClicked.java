@@ -25,6 +25,8 @@ public class DepositButtonClicked implements ActionListener, DataAccessView {
 
     public void actionPerformed(ActionEvent event) {
         // get selected name
+
+        System.out.println("Hit me");
         selectedAccount = parentFrame.getSelectedAccount();
         if (selectedAccount != ""){
             JDialog_Deposit wd = new JDialog_Deposit(parentFrame, this, selectedAccount);
@@ -42,6 +44,13 @@ public class DepositButtonClicked implements ActionListener, DataAccessView {
 //                JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 //            }
         }
+        else
+        {
+
+                JOptionPane.showMessageDialog(null, "Please select account from table !!!");
+
+        }
+
     }
 
     public void setData(HashMap<String, String> data){
