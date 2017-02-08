@@ -56,7 +56,7 @@ public class FinCo extends JFrame{
         setTitle("Bank Application.");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout(0,0));
-        setSize(575,310);
+        setSize(625,310);
         setVisible(false);
         JPanel1.setLayout(null);
         getContentPane().add(BorderLayout.CENTER, JPanel1);
@@ -79,6 +79,7 @@ public class FinCo extends JFrame{
 //        rowdata = new Object[8];
 
         JButton_PerAC.setText("Add personal account");
+        JButton_PerAC.setActionCommand("jbutton");
         JPanel1.add(JButton_PerAC);
         JButton_PerAC.setBounds(24,20,192,33);
 
@@ -89,28 +90,27 @@ public class FinCo extends JFrame{
 
         JButton_Deposit.setText("Deposit");
         JPanel1.add(JButton_Deposit);
-        JButton_Deposit.setBounds(468,104,96,33);
+        JButton_Deposit.setBounds(468,104,150,33);
 
         JButton_Withdraw.setText("Withdraw");
         JPanel1.add(JButton_Withdraw);
-        JButton_Withdraw.setBounds(468,164,96,33);
+        JButton_Withdraw.setBounds(468,164,150,33);
 
-        JButton_Addinterest.setBounds(448,20,106,33);
+        JButton_Addinterest.setBounds(468,20,150,33);
         JButton_Addinterest.setText("Add interest");
         JPanel1.add(JButton_Addinterest);
 
-        JButton_MonthlyReport.setBounds(468,164,96,33);
+        JButton_MonthlyReport.setBounds(468,200,150,33);
         JButton_MonthlyReport.setText("Generate Report");
         JPanel1.add(JButton_MonthlyReport);
 
         JButton_Exit.setText("Exit");
         JPanel1.add(JButton_Exit);
-        JButton_Exit.setBounds(468,248,96,31);
+        JButton_Exit.setBounds(468,248,150,31);
         // lineBorder1.setRoundedCorners(true);
         // lineBorder1.setLineColor(java.awt.Color.green);
         //$$ lineBorder1.move(24,312);
 
-        JButton_PerAC.setActionCommand("jbutton");
 
         FinCo.SymWindow aSymWindow = new FinCo.SymWindow();
         this.addWindowListener(aSymWindow);
