@@ -9,5 +9,5 @@ import java.util.List;
  * Created by bishal on 2/6/17.
  */
 public interface ICustomerChangeObserver {
-    void update(ICustomer customer, IAccount account);
+    void doUpdate(ICustomer customer, IAccount account);
 }

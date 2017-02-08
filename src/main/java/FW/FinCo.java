@@ -6,6 +6,8 @@ import FW.Factories.AbstractFactory;
 import FW.Factories.DefaultFactory;
 import FW.Functors.ActionListeners.AddCompanyButtonClicked;
 import FW.Functors.ActionListeners.AddPersonButtonClicked;
+import FW.Functors.ActionListeners.DepositButtonClicked;
+import FW.Functors.ActionListeners.WithdrawButtonClicked;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Model.Customer.IPerson;
@@ -32,7 +34,7 @@ import java.util.List;
 public class FinCo extends JFrame{
     String accountnr, clientName, street, city, zip, state, accountType, clientType, amountDeposit;
     boolean newaccount;
-    private DefaultTableModel model;
+    private DefaultTableModel myModel;
     private JTable JTable1;
     private JScrollPane JScrollPane1;
     FinCo myframe;
@@ -49,6 +51,7 @@ public class FinCo extends JFrame{
 
     public FinCo() {
         myframe = this;
+        InstanceManager.setAppInstance(this);
 
         setTitle("Bank Application.");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -60,10 +63,10 @@ public class FinCo extends JFrame{
         JPanel1.setBounds(0,0,575,310);
 
         JScrollPane1 = new JScrollPane();
-        model = new DefaultTableModel();
-//        JTable1 = new JTable(model);
 
-        JTable1 = new CustomersTableView(model);
+        myModel = new DefaultTableModel();
+
+        JTable1 = new CustomersTableView(myModel);
         attachAccountChangeObserver((ICustomerChangeObserver) JTable1);
 
         newaccount=false;
@@ -106,8 +109,8 @@ public class FinCo extends JFrame{
         JButton_Exit.addActionListener(lSymAction);
         JButton_PerAC.addActionListener(new AddPersonButtonClicked(this));
         JButton_CompAC.addActionListener(new AddCompanyButtonClicked(this));
-        JButton_Deposit.addActionListener(lSymAction);
-        JButton_Withdraw.addActionListener(lSymAction);
+        JButton_Deposit.addActionListener(new DepositButtonClicked(this));
+        JButton_Withdraw.addActionListener(new WithdrawButtonClicked(this));
         JButton_Addinterest.addActionListener(lSymAction);
 
         setFactory(new DefaultFactory());
@@ -157,7 +160,6 @@ public class FinCo extends JFrame{
 
 
 
-
     class SymWindow extends java.awt.event.WindowAdapter
     {
         public void windowClosing(WindowEvent event)
@@ -193,8 +195,8 @@ public class FinCo extends JFrame{
 //                JButtonPerAC_actionPerformed(event);
 //            else if (object == JButton_CompAC)
 //                JButtonCompAC_actionPerformed(event);
-            else if (object == JButton_Deposit)
-                JButtonDeposit_actionPerformed(event);
+//            else if (object == JButton_Deposit)
+//                JButtonDeposit_actionPerformed(event);
 //            else if (object == JButton_Withdraw)
 //                JButtonWithdraw_actionPerformed(event);
             else if (object == JButton_Addinterest)
@@ -275,26 +277,26 @@ public class FinCo extends JFrame{
 
 //    }
 
-    void JButtonDeposit_actionPerformed(ActionEvent event)
-    {
-        // get selected name
-        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        if (selection >=0){
-            String accnr = (String)model.getValueAt(selection, 0);
-
-            //Show the dialog for adding deposit amount for the current mane
-            JDialog_Deposit dep = new JDialog_Deposit(myframe, accnr);
-            dep.setBounds(430, 15, 275, 140);
-            dep.show();
-
-            // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 5);
-            long currentamount = Long.parseLong(samount);
-            long newamount=currentamount+deposit;
-            model.setValueAt(String.valueOf(newamount),selection, 5);
-        }
-    }
+//    void JButtonDeposit_actionPerformed(ActionEvent event)
+//    {
+//        // get selected name
+//        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+//        if (selection >=0){
+//            String accnr = (String)myModel.getValueAt(selection, 0);
+//
+//            //Show the dialog for adding deposit amount for the current mane
+//            JDialog_Deposit dep = new JDialog_Deposit(myframe, accnr);
+//            dep.setBounds(430, 15, 275, 140);
+//            dep.show();
+//
+//            // compute new amount
+//            long deposit = Long.parseLong(amountDeposit);
+//            String samount = (String)myModel.getValueAt(selection, 5);
+//            long currentamount = Long.parseLong(samount);
+//            long newamount=currentamount+deposit;
+//            myModel.setValueAt(String.valueOf(newamount),selection, 5);
+//        }
+//    }
 
 //    void JButtonWithdraw_actionPerformed(ActionEvent event)
 //    {
@@ -324,24 +326,30 @@ public class FinCo extends JFrame{
 
     public String getSelectedAccount(){
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        return selection >= 0 ? (String) model.getValueAt(selection, 0) : "";
+        return selection >= 0 ? (String) myModel.getValueAt(selection, 0) : "";
     }
 
     void JButtonAddinterest_actionPerformed(ActionEvent event)
     {
         JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
-
     }
 
     public void addAccount(ICustomer customer, IAccount account){
+        notifyObservers(customer, account);
         customer.addAccount(account);
         InstanceManager.getDAO().addCutomer(customer);
-        notifyObservers(customer, account);
     }
 
     public void deposit(IAccount account, double amountDeposit) {
         IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), amountDeposit);
+        account.addEntry(entry);
     }
+
+    public void withdraw(IAccount account, double amountWithdraw) {
+        IEntry entry = new Entry(EntryType.WITHDRAW, new Date().toString(), amountWithdraw);
+        account.addEntry(entry);
+    }
+
 
     private List<ICustomerChangeObserver> observers = new ArrayList();
     public void attachAccountChangeObserver(ICustomerChangeObserver observer){
@@ -352,7 +360,7 @@ public class FinCo extends JFrame{
     }
     public void notifyObservers(ICustomer customer, IAccount account){
         for(ICustomerChangeObserver observer: observers){
-            observer.update(customer, account);
+            observer.doUpdate(customer, account);
         }
     }
 }

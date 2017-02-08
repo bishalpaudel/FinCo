@@ -91,7 +91,7 @@ public class JDialog_Withdraw extends JDialog
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
         HashMap<String, String> data = new HashMap();
-        data.put("amountDeposit", JTextField_AMT.getText());
+        data.put("amountWithdraw", JTextField_AMT.getText());
 		dispose();
 	}
 

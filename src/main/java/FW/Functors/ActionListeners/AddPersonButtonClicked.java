@@ -1,6 +1,6 @@
 package FW.Functors.ActionListeners;
 
-import FW.Factories.AbstractFactory;
+import FW.FinCo;
 import FW.JDialog_AddCompAcc;
 import FW.JDialog_AddPAcc;
 import FW.Model.Accounts.IAccount;
@@ -46,8 +46,7 @@ public class AddPersonButtonClicked implements ActionListener, DataAccessView {
     }
 
     public void setData(HashMap<String, String> data){
-        AbstractFactory factory = InstanceManager.getFactoryInstance();
-        IAccount account = factory.getAccount(AccountType.DEFAULT);
+        IAccount account = InstanceManager.getFactoryInstance().getAccount(AccountType.DEFAULT);
         account.setAccountNumber(data.get("accountNumber"));
 
         ICustomer customer = InstanceManager.getFactoryInstance().getCustomer(CustomerType.PERSON);
