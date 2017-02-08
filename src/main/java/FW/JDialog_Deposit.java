@@ -87,6 +87,7 @@ public class JDialog_Deposit extends JDialog
 	{
 		HashMap<String, String> data = new HashMap();
 		data.put("amountDeposit", JTextField_Deposit.getText());
+		controller.setData(data);
         dispose();
 	}
 

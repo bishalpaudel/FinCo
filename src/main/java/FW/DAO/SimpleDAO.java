@@ -33,10 +33,10 @@ public class SimpleDAO implements DAO {
         accounts.add(account);
     }
 
-    public IAccount getAccount(String acountNumber) {
+    public IAccount getAccount(String accountNumber) {
         for(ICustomer c: customers){
-            for(IAccount account: accounts){
-                if(account.getAccountNumber().equals(acountNumber)){
+            for(IAccount account: c.getAccounts()){
+                if(account.getAccountNumber().equals(accountNumber)){
                     return account;
                 }
             }
@@ -44,7 +44,4 @@ public class SimpleDAO implements DAO {
         return null;
     }
 
-//    public List<IEntry> getEntries() {
-//        return null;
-//    }
 }

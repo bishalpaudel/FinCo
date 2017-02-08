@@ -92,6 +92,7 @@ public class JDialog_Withdraw extends JDialog
 	{
         HashMap<String, String> data = new HashMap();
         data.put("amountWithdraw", JTextField_AMT.getText());
+        controller.setData(data);
 		dispose();
 	}
 

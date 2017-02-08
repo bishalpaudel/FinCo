@@ -29,7 +29,7 @@ public class WithdrawButtonClicked implements ActionListener, DataAccessView {
 
     public void actionPerformed(ActionEvent event) {
         // get selected name
-        String selectedAccount = parentFrame.getSelectedAccount();
+        selectedAccount = parentFrame.getSelectedAccount();
         if (selectedAccount != ""){
             JDialog_Withdraw wd = new JDialog_Withdraw(parentFrame, this, selectedAccount);
 
@@ -50,7 +50,9 @@ public class WithdrawButtonClicked implements ActionListener, DataAccessView {
 
     public void setData(HashMap<String, String> data){
         IAccount account = InstanceManager.getDAO().getAccount(selectedAccount);
-        InstanceManager.getAppInstance().withdraw(account, Double.parseDouble(data.get("amountWithdraw")));
+        if(account != null){
+            InstanceManager.getAppInstance().withdraw(account, Double.parseDouble(data.get("amountWithdraw")));
+        }
     }
 
     public JFrame getParentFrame(){
