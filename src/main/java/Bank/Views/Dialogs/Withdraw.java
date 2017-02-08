@@ -88,6 +88,15 @@ public class Withdraw extends JDialog
 
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
+		try
+		{
+			Double.parseDouble(JTextField_AMT.getText());
+		}
+		catch(NumberFormatException ex)
+		{
+			JOptionPane.showMessageDialog(null, "Please enter numeric deposit amount !!!");
+			return;
+		}
         HashMap<String, String> data = new HashMap();
         data.put("amountWithdraw", JTextField_AMT.getText());
         controller.setData(data);
