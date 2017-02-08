@@ -18,7 +18,6 @@ public interface IAccount {
 
     public Boolean withdraw(IEntry entry);
     public Boolean deposit(IEntry deposit);
-    public Boolean addInterest(Double interestAmt);
     public Boolean addEntry(IEntry entry);
 
     public List<IEntry> getEntries();
@@ -27,4 +26,6 @@ public interface IAccount {
      ICustomer getCustomer();
 
      void generateReport(IReport report);
+
+    void generateInterest();
 }

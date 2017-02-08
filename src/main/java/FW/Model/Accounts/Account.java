@@ -2,7 +2,9 @@ package FW.Model.Accounts;
 
 import FW.Model.Customer.ICustomer;
 import FW.Report.IReport;
+import FW.Transaction.Entry;
 import FW.Transaction.IEntry;
+import FW.Types.EntryType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +12,14 @@ import java.util.List;
 /**
  * Created by Akash on 2/7/2017.
  */
-public class Account implements  IAccount {
+public abstract class Account implements  IAccount {
 
+    private ICustomer customer;
     private String accountNumber;
+
     private String abbreviation = "DEF";
 
-    private Double interest = 0.0;
+    private Double interestRate = 0.0;
 
     private List<IEntry> entries = new ArrayList<IEntry>();
 
@@ -49,11 +53,7 @@ public class Account implements  IAccount {
         return true;
     }
 
-    public Boolean addInterest(Double interestAmt) {
-        interest = interestAmt;
-        // Update logic to update new interest
-        return true;
-    }
+//    }
 
     public Boolean addEntry(IEntry entry) {
         entries.add(entry);
@@ -63,11 +63,11 @@ public class Account implements  IAccount {
     public List<IEntry> getEntries() {
         return entries;
     }
-
     public void setCustomer(ICustomer cust)
     {
         customer = cust;
     }
+
     public ICustomer getCustomer()
     {
         return customer;
@@ -77,5 +77,6 @@ public class Account implements  IAccount {
     {
         report.generate();
     }
-    private ICustomer customer;
+
+    public abstract void generateInterest();
 }

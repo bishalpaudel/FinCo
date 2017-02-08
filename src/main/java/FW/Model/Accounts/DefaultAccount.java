@@ -2,16 +2,20 @@ package FW.Model.Accounts;
 
 import FW.Model.Customer.ICustomer;
 import FW.Report.IReport;
+import FW.Transaction.Entry;
 import FW.Transaction.IEntry;
+import FW.Types.EntryType;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by bishal on 2/6/17.
  */
-public class DefaultAccount implements IAccount{
+public class DefaultAccount extends  Account implements IAccount{
     private String accountNumber;
     private String abbreviation = "DEF";
+    Double interestRate = 0.0;
 
     public String getAccountNumber() {
         return accountNumber;
@@ -25,32 +29,32 @@ public class DefaultAccount implements IAccount{
         return abbreviation;
     }
 
-    public Double getBalance() {
-        return 0.0;
-    }
-
-    public Boolean withdraw(IEntry entry) {
-
-        return false;
-    }
-
-    public Boolean deposit(IEntry deposit) {
-        return false;
-    }
-
-    public Boolean addInterest(Double interestAmt) {
-        return false;
-    }
-
-    public Boolean addEntry(IEntry entry)
-    {
-        return false;
-    }
-
-    public List<IEntry> getEntries()
-    {
-        return null;
-    }
+//    public Double getBalance() {
+//        return 0.0;
+//    }
+//
+//    public Boolean withdraw(IEntry entry) {
+//
+//        return false;
+//    }
+//
+//    public Boolean deposit(IEntry deposit) {
+//        return false;
+//    }
+//
+//    public Boolean addInterest(Double interestAmt) {
+//        return false;
+//    }
+//
+//    public Boolean addEntry(IEntry entry)
+//    {
+//        return false;
+//    }
+//
+//    public List<IEntry> getEntries()
+//    {
+//        return null;
+//    }
 
     public void setCustomer(ICustomer customer)
     {
@@ -65,5 +69,12 @@ public class DefaultAccount implements IAccount{
     {
 
     }
+
+    public void generateInterest() {
+        Double totalBalance = getBalance();
+        Double interest = totalBalance * interestRate;
+        IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), interest);
+    }
+
     private ICustomer customer;
 }

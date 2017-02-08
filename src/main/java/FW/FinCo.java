@@ -158,6 +158,12 @@ public class FinCo extends JFrame{
         }
     }
 
+    public void addInterestToAllAccounts() {
+        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
+        for(IAccount account : accounts){
+            account.generateInterest();
+        }
+    }
 
 
     class SymWindow extends java.awt.event.WindowAdapter
