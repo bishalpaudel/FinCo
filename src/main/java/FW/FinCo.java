@@ -1,5 +1,6 @@
 package FW;
 
+import FW.DAO.SimpleDAO;
 import FW.Factories.IFactory;
 import FW.Factories.DefaultFactory;
 import FW.Functors.ActionListeners.*;
@@ -70,6 +71,7 @@ public class FinCo extends JFrame{
             finco.initializeViews();
 
             InstanceManager.setAppInstance(finco);
+            InstanceManager.setDAOInstance(new SimpleDAO());
             InstanceManager.setFactoryInstance(new DefaultFactory());
             finco.setVisible(true);
 //            (new FinCo()).setVisible(true);
