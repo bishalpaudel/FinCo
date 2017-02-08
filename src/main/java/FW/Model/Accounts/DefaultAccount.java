@@ -42,7 +42,9 @@ public class DefaultAccount extends  Account implements IAccount{
 //        return false;
 //    }
 //
-//    public Boolean addInterest(Double interestAmt) {
+//    public Boolean addIntere
+//
+// st(Double interestAmt) {
 //        return false;
 //    }
 //
@@ -56,25 +58,10 @@ public class DefaultAccount extends  Account implements IAccount{
 //        return null;
 //    }
 
-    public void setCustomer(ICustomer customer)
-    {
-        customer = customer;
-    }
-    public ICustomer getCustomer()
-    {
-        return customer;
-    }
-
-    public void generateReport(IReport report)
-    {
-
-    }
 
     public void generateInterest() {
         Double totalBalance = getBalance();
         Double interest = totalBalance * interestRate;
         IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), interest);
     }
-
-    private ICustomer customer;
 }

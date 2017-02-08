@@ -205,6 +205,7 @@ public class JDialog_AddPAcc extends JDialog
         data.put("city", JTextField_CT.getText());
         data.put("zip", JTextField_ZIP.getText());
         data.put("state", JTextField_ST.getText());
+		data.put("email", JTextField_EM.getText());
         if (JRadioButton_Chk.isSelected()) {
             data.put("accountType", "Checkings");
         } else {

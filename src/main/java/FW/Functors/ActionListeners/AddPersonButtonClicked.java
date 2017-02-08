@@ -55,6 +55,7 @@ public class AddPersonButtonClicked implements ActionListener, DataAccessView {
         customer.setCity(data.get("city"));
         customer.setZip(data.get("zip"));
         customer.setState(data.get("state"));
+        customer.setEmail(data.get("email"));
 
         InstanceManager.getAppInstance().addAccount(customer, account);
     }

@@ -55,6 +55,7 @@ public class AddCompanyButtonClicked implements java.awt.event.ActionListener, D
         customer.setCity(data.get("city"));
         customer.setZip(data.get("zip"));
         customer.setState(data.get("state"));
+        customer.setEmail(data.get("email"));
 
 
 
