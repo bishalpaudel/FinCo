@@ -99,7 +99,7 @@ public class FinCo extends JFrame{
         FinCo.SymAction lSymAction = new FinCo.SymAction();
         JButton_Exit.addActionListener(lSymAction);
         JButton_PerAC.addActionListener(lSymAction);
-        JButton_CompAC.addActionListener(new AddCompanyButtonClicked());
+        JButton_CompAC.addActionListener(new AddCompanyButtonClicked(this));
         JButton_Deposit.addActionListener(lSymAction);
         JButton_Withdraw.addActionListener(lSymAction);
         JButton_Addinterest.addActionListener(lSymAction);
@@ -246,9 +246,9 @@ public class FinCo extends JFrame{
 		 show it
 		*/
 
-        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
-        pac.setBounds(450, 20, 300, 330);
-        pac.show();
+//        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+//        pac.setBounds(450, 20, 300, 330);
+//        pac.show();
 
         if (newaccount){
             // add row to table
@@ -322,7 +322,7 @@ public class FinCo extends JFrame{
 
     public void addAccount(ICustomer customer, IAccount account){
         customer.addAccount(account);
-        InstanceManager.getDAO().add
+        InstanceManager.getDAO().addCutomer(customer);
     }
 
 }

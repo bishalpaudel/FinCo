@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface DAO {
     List<ICustomer> getCustomers();
+    public void addCutomer(ICustomer customer);
     List<IAccount> getAccounts();
+    public void addAccount(IAccount account);
 //    List<IEntry> getEntries();
 }

@@ -11,7 +11,7 @@ import FW.Types.CustomerType;
  * Created by bishal on 2/7/17.
  */
 public class DefaultFactory implements AbstractFactory {
-    public ICustomer getParty(CustomerType type) {
+    public ICustomer getCustomer(CustomerType type) {
         if(type == CustomerType.COMPANY){
             return new Company();
         }else if(type == CustomerType.PERSON){
@@ -20,7 +20,7 @@ public class DefaultFactory implements AbstractFactory {
         return null;
     }
 
-    public IAccount getAccount(String type) {
+    public IAccount getAccount(AccountType type) {
         return null;
     }
 }

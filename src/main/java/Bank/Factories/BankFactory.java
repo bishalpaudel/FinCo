@@ -7,6 +7,7 @@ import FW.Model.Customer.ICustomer;
 import Bank.Model.SavingsAccount;
 import FW.Factories.AbstractFactory;
 import FW.Model.Customer.Person;
+import FW.Types.AccountType;
 import FW.Types.CustomerType;
 
 /**
@@ -26,4 +27,11 @@ public class BankFactory implements AbstractFactory {
         return null;
     }
 
+    public ICustomer getCustomer(CustomerType type) {
+        return null;
+    }
+
+    public IAccount getAccount(AccountType type) {
+        return null;
+    }
 }

@@ -49,7 +49,7 @@ public class AddCompanyButtonClicked implements java.awt.event.ActionListener, D
         ICustomer customer = InstanceManager.getFactoryInstance().getCustomer(CustomerType.COMPANY);
         account.setAccountNumber(data.get("accountNumber"));
 
-        InstanceManager.getController().addAccount(customer, account);
+        InstanceManager.getAppInstance().addAccount(customer, account);
     }
 
     public JFrame getParentFrame(){
