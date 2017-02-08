@@ -5,7 +5,7 @@ import FW.Types.EntryType;
 /**
  * Created by Akash on 2/6/2017.
  */
-public class Entry {
+public class Entry implements IEntry{
 
     String _date;
     double _amount;
@@ -15,6 +15,7 @@ public class Entry {
         _entryType = entryType;
         _date = date;
         _amount = amount;
+        System.out.println(amount);
     }
     public double getAmount()
     {

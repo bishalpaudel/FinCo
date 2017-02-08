@@ -20,5 +20,4 @@ public interface IAccount {
     public Boolean addEntry(IEntry entry);
 
     public List<IEntry> getEntries();
-
 }

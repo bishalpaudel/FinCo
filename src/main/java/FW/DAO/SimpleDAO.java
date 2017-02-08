@@ -22,6 +22,7 @@ public class SimpleDAO implements DAO {
 
     public void addCutomer(ICustomer customer){
         customers.add(customer);
+        System.out.println(customer.getName());
     }
 
     public List<IAccount> getAccounts() {
@@ -30,6 +31,17 @@ public class SimpleDAO implements DAO {
 
     public void addAccount(IAccount account){
         accounts.add(account);
+    }
+
+    public IAccount getAccount(String acountNumber) {
+        for(ICustomer c: customers){
+            for(IAccount account: accounts){
+                if(account.getAccountNumber().equals(acountNumber)){
+                    return account;
+                }
+            }
+        }
+        return null;
     }
 
 //    public List<IEntry> getEntries() {

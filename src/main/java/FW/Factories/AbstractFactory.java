@@ -3,8 +3,10 @@ package FW.Factories;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.Customer;
 import FW.Model.Customer.ICustomer;
+import FW.Transaction.IEntry;
 import FW.Types.AccountType;
 import FW.Types.CustomerType;
+import FW.Types.EntryType;
 
 /**
  * Created by bishal on 2/6/17.
@@ -12,4 +14,5 @@ import FW.Types.CustomerType;
 public interface AbstractFactory {
     ICustomer getCustomer(CustomerType type);
     IAccount getAccount(AccountType type);
+//    IEntry getEntry(EntryType type);
 }

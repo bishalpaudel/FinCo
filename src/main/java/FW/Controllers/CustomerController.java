@@ -10,14 +10,14 @@ import FW.Singletons.InstanceManager;
  */
 public class CustomerController implements Controller{
     public void addPerson(){
-        JDialog_AddPAcc pac = new JDialog_AddPAcc();
-        pac.setBounds(450, 20, 300, 330);
-        pac.show();
-
-        ICustomer customer = pac.getPerson();
-        IAccount account = pac.getAccount();
-
-        customer.addAccount(account);
-        InstanceManager.getCustomerManagerInstance().addCustomer(customer);
+//        JDialog_AddPAcc pac = new JDialog_AddPAcc();
+//        pac.setBounds(450, 20, 300, 330);
+//        pac.show();
+//
+//        ICustomer customer = pac.getPerson();
+//        IAccount account = pac.getAccount();
+//
+//        customer.addAccount(account);
+//        InstanceManager.getCustomerManagerInstance().addCustomer(customer);
     }
 }

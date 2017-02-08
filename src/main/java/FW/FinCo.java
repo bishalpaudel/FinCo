@@ -3,13 +3,18 @@ package FW;
 import FW.Controllers.Controller;
 import FW.Controllers.CustomerController;
 import FW.Factories.AbstractFactory;
+import FW.Factories.DefaultFactory;
 import FW.Functors.ActionListeners.AddCompanyButtonClicked;
+import FW.Functors.ActionListeners.AddPersonButtonClicked;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Model.Customer.IPerson;
 import FW.Model.Customer.Person;
 import FW.Observers.ICustomerChangeObserver;
 import FW.Singletons.InstanceManager;
+import FW.Transaction.Entry;
+import FW.Transaction.IEntry;
+import FW.Types.EntryType;
 import FW.Views.CustomersTableView;
 
 import javax.swing.*;
@@ -18,6 +23,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -98,11 +104,13 @@ public class FinCo extends JFrame{
         this.addWindowListener(aSymWindow);
         FinCo.SymAction lSymAction = new FinCo.SymAction();
         JButton_Exit.addActionListener(lSymAction);
-        JButton_PerAC.addActionListener(lSymAction);
+        JButton_PerAC.addActionListener(new AddPersonButtonClicked(this));
         JButton_CompAC.addActionListener(new AddCompanyButtonClicked(this));
         JButton_Deposit.addActionListener(lSymAction);
         JButton_Withdraw.addActionListener(lSymAction);
         JButton_Addinterest.addActionListener(lSymAction);
+
+        setFactory(new DefaultFactory());
 
     }
 
@@ -148,6 +156,8 @@ public class FinCo extends JFrame{
     }
 
 
+
+
     class SymWindow extends java.awt.event.WindowAdapter
     {
         public void windowClosing(WindowEvent event)
@@ -179,14 +189,14 @@ public class FinCo extends JFrame{
             Object object = event.getSource();
             if (object == JButton_Exit)
                 JButtonExit_actionPerformed(event);
-            else if (object == JButton_PerAC)
-                JButtonPerAC_actionPerformed(event);
-            else if (object == JButton_CompAC)
-                JButtonCompAC_actionPerformed(event);
+//            else if (object == JButton_PerAC)
+//                JButtonPerAC_actionPerformed(event);
+//            else if (object == JButton_CompAC)
+//                JButtonCompAC_actionPerformed(event);
             else if (object == JButton_Deposit)
                 JButtonDeposit_actionPerformed(event);
-            else if (object == JButton_Withdraw)
-                JButtonWithdraw_actionPerformed(event);
+//            else if (object == JButton_Withdraw)
+//                JButtonWithdraw_actionPerformed(event);
             else if (object == JButton_Addinterest)
                 JButtonAddinterest_actionPerformed(event);
 
@@ -200,10 +210,10 @@ public class FinCo extends JFrame{
         System.exit(0);
     }
 
-    void JButtonPerAC_actionPerformed(ActionEvent event)
-    {
-        CustomerController customerController = new CustomerController();
-        customerController.addPerson();
+//    void JButtonPerAC_actionPerformed(ActionEvent event)
+//    {
+//        CustomerController customerController = new CustomerController();
+//        customerController.addPerson();
 		/*
 		 JDialog_AddPAcc type object is for adding personal information
 		 construct a JDialog_AddPAcc type object
@@ -236,10 +246,10 @@ public class FinCo extends JFrame{
 
 
 
-    }
+//    }
 
-    void JButtonCompAC_actionPerformed(ActionEvent event)
-    {
+//    void JButtonCompAC_actionPerformed(ActionEvent event)
+//    {
 		/*
 		 construct a JDialog_AddCompAcc type object
 		 set the boundaries and
@@ -250,20 +260,20 @@ public class FinCo extends JFrame{
 //        pac.setBounds(450, 20, 300, 330);
 //        pac.show();
 
-        if (newaccount){
-            // add row to table
-            rowdata[0] = accountnr;
-            rowdata[1] = clientName;
-            rowdata[2] = city;
-            rowdata[3] = "C";
-            rowdata[4] = accountType;
-            rowdata[5] = "0";
-            model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-            newaccount=false;
-        }
+//        if (newaccount){
+//            // add row to table
+//            rowdata[0] = accountnr;
+//            rowdata[1] = clientName;
+//            rowdata[2] = city;
+//            rowdata[3] = "C";
+//            rowdata[4] = accountType;
+//            rowdata[5] = "0";
+//            model.addRow(rowdata);
+//            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
+//            newaccount=false;
+//        }
 
-    }
+//    }
 
     void JButtonDeposit_actionPerformed(ActionEvent event)
     {
@@ -284,34 +294,37 @@ public class FinCo extends JFrame{
             long newamount=currentamount+deposit;
             model.setValueAt(String.valueOf(newamount),selection, 5);
         }
-
-
     }
 
-    void JButtonWithdraw_actionPerformed(ActionEvent event)
-    {
-        // get selected name
+//    void JButtonWithdraw_actionPerformed(ActionEvent event)
+//    {
+//        // get selected name
+//        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+//        if (selection >=0){
+//            String accnr = (String)model.getValueAt(selection, 0);
+//
+//            //Show the dialog for adding withdraw amount for the current mane
+//            JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr);
+//            wd.setBounds(430, 15, 275, 140);
+//            wd.show();
+//
+//            // compute new amount
+//            long deposit = Long.parseLong(amountDeposit);
+//            String samount = (String)model.getValueAt(selection, 5);
+//            long currentamount = Long.parseLong(samount);
+//            long newamount=currentamount-deposit;
+//            model.setValueAt(String.valueOf(newamount),selection, 5);
+//            if (newamount <0){
+//                JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
+//            }
+//        }
+//
+//
+//    }
+
+    public String getSelectedAccount(){
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        if (selection >=0){
-            String accnr = (String)model.getValueAt(selection, 0);
-
-            //Show the dialog for adding withdraw amount for the current mane
-            JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr);
-            wd.setBounds(430, 15, 275, 140);
-            wd.show();
-
-            // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 5);
-            long currentamount = Long.parseLong(samount);
-            long newamount=currentamount-deposit;
-            model.setValueAt(String.valueOf(newamount),selection, 5);
-            if (newamount <0){
-                JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-            }
-        }
-
-
+        return selection >= 0 ? (String) model.getValueAt(selection, 0) : "";
     }
 
     void JButtonAddinterest_actionPerformed(ActionEvent event)
@@ -323,6 +336,10 @@ public class FinCo extends JFrame{
     public void addAccount(ICustomer customer, IAccount account){
         customer.addAccount(account);
         InstanceManager.getDAO().addCutomer(customer);
+    }
+
+    public void deposit(IAccount account, double amountDeposit) {
+        IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), amountDeposit);
     }
 
 }

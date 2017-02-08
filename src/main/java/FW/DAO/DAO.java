@@ -13,5 +13,6 @@ public interface DAO {
     public void addCutomer(ICustomer customer);
     List<IAccount> getAccounts();
     public void addAccount(IAccount account);
+    public IAccount getAccount(String acountNumber);
 //    List<IEntry> getEntries();
 }

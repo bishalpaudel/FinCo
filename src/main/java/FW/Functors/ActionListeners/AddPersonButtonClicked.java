@@ -1,6 +1,6 @@
 package FW.Functors.ActionListeners;
 
-import FW.FinCo;
+import FW.Factories.AbstractFactory;
 import FW.JDialog_AddCompAcc;
 import FW.JDialog_AddPAcc;
 import FW.Model.Accounts.IAccount;
@@ -18,16 +18,16 @@ import java.util.HashMap;
 /**
  * Created by bishal on 2/6/17.
  */
-public class AddCompanyButtonClicked implements java.awt.event.ActionListener, DataAccessView {
+public class AddPersonButtonClicked implements ActionListener, DataAccessView {
 
     JFrame parentFrame;
-    public AddCompanyButtonClicked(JFrame parentFrame) {
+    public AddPersonButtonClicked(JFrame parentFrame) {
         this.parentFrame = parentFrame;
     }
 
     public void actionPerformed(ActionEvent event) {
 //        FinCo finCoForm=null;
-        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(parentFrame, this);
+        JDialog_AddPAcc pac = new JDialog_AddPAcc(parentFrame, this);
         pac.setBounds(450, 20, 300, 330);
         pac.show();
 
@@ -46,33 +46,16 @@ public class AddCompanyButtonClicked implements java.awt.event.ActionListener, D
     }
 
     public void setData(HashMap<String, String> data){
-        IAccount account = InstanceManager.getFactoryInstance().getAccount(AccountType.DEFAULT);
+        AbstractFactory factory = InstanceManager.getFactoryInstance();
+        IAccount account = factory.getAccount(AccountType.DEFAULT);
         account.setAccountNumber(data.get("accountNumber"));
 
-        ICustomer customer = InstanceManager.getFactoryInstance().getCustomer(CustomerType.COMPANY);
+        ICustomer customer = InstanceManager.getFactoryInstance().getCustomer(CustomerType.PERSON);
         customer.setName(data.get("city"));
         customer.setStreet(data.get("street"));
         customer.setCity(data.get("city"));
         customer.setZip(data.get("zip"));
         customer.setState(data.get("state"));
-
-
-
-//        person.setName(JTextField_NAME.getText());
-//        person.setStreet(JTextField_STR.getText());
-//        person.setCity(JTextField_CT.getText());
-//        person.setZip(JTextField_ZIP.getText());
-//        person.setState(JTextField_ST.getText());
-
-//       clientName = JTextField_NAME.getText();
-//       street = JTextField_STR.getText();
-//       city = JTextField_CT.getText();
-//       zip = JTextField_ZIP.getText();
-//       state = JTextField_ST.getText();
-//       if (JRadioButton_Chk.isSelected())
-//           accountType = "Ch";
-//	   else
-//           accountType = "S";
 
         InstanceManager.getAppInstance().addAccount(customer, account);
     }
