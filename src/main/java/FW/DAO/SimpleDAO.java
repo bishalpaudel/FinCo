@@ -1,5 +1,8 @@
 package FW.DAO;
 
+import FW.Iterators.AccountIterator;
+import FW.Iterators.CustomerIterator;
+import FW.Iterators.IIterator;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 
@@ -30,12 +33,20 @@ public class SimpleDAO implements DAO {
 
         List<IAccount> listAccounts = new ArrayList<IAccount>();
 
-        for(ICustomer customer : getCustomers())
+        IIterator<ICustomer> customerIterator = new CustomerIterator(getCustomers());
+        //IIterator<IAccount> accounts = new AccountIterator(getCustomers());
+
+        while(customerIterator.hasNext())
         {
-            for (IAccount account : customer.getAccounts())
+            ICustomer customer = customerIterator.next();
+            List<IAccount> accounts = customer.getAccounts();
+            IIterator<IAccount> accountIterator = new AccountIterator(accounts);
+
+            while(accountIterator.hasNext())
             {
-                listAccounts.add(account);
+                listAccounts.add(accountIterator.next());
             }
+
         }
         return listAccounts;
     }
@@ -45,12 +56,24 @@ public class SimpleDAO implements DAO {
     }
 
     public IAccount getAccount(String accountNumber) {
-        for(ICustomer c: customers){
-            for(IAccount account: c.getAccounts()){
+
+        IIterator<ICustomer> customerIterator = new CustomerIterator(getCustomers());
+        //IIterator<IAccount> accounts = new AccountIterator(getCustomers());
+
+        while(customerIterator.hasNext())
+        {
+            ICustomer customer = customerIterator.next();
+            List<IAccount> accounts = customer.getAccounts();
+            IIterator<IAccount> accountIterator = new AccountIterator(accounts);
+
+            while(accountIterator.hasNext())
+            {
+                IAccount account = accountIterator.next();
                 if(account.getAccountNumber().equals(accountNumber)){
                     return account;
                 }
             }
+
         }
         return null;
     }
