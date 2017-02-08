@@ -2,18 +2,14 @@ package FW;
 
 import FW.Controllers.Controller;
 import FW.Controllers.CustomerController;
-import FW.Model.Accounts.Account;
+import FW.Factories.AbstractFactory;
+import FW.Functors.ActionListeners.AddCompanyButtonClicked;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Model.Customer.IPerson;
 import FW.Model.Customer.Person;
 import FW.Observers.ICustomerChangeObserver;
-import FW.Report.IReport;
-import FW.Report.MonthlyBillingReport;
 import FW.Singletons.InstanceManager;
-import FW.Transaction.Entry;
-import FW.Transaction.IEntry;
-import FW.Types.EntryType;
 import FW.Views.CustomersTableView;
 
 import javax.swing.*;
@@ -103,7 +99,7 @@ public class FinCo extends JFrame{
         FinCo.SymAction lSymAction = new FinCo.SymAction();
         JButton_Exit.addActionListener(lSymAction);
         JButton_PerAC.addActionListener(lSymAction);
-        JButton_CompAC.addActionListener(lSymAction);
+        JButton_CompAC.addActionListener(new AddCompanyButtonClicked(this));
         JButton_Deposit.addActionListener(lSymAction);
         JButton_Withdraw.addActionListener(lSymAction);
         JButton_Addinterest.addActionListener(lSymAction);
@@ -111,9 +107,9 @@ public class FinCo extends JFrame{
     }
 
 
-//    public void setAccountFactory(AbstractFactory factory) {
-//        factory = factory;
-//    }
+    public void setFactory(AbstractFactory factory) {
+        InstanceManager.setFactoryInstance(factory);
+    }
     /*****************************************************
      * The entry point for this application.
      * Sets the Look and Feel to the System Look and Feel.
@@ -121,24 +117,6 @@ public class FinCo extends JFrame{
      *****************************************************/
     static public void main(String args[])
     {
-        ICustomer customer = new Person();
-        customer.setName("Akash");
-        customer.setState("Iowa");
-
-        IAccount account = new Account();
-        account.setCustomer(customer);
-
-        IEntry entry1 = new Entry(EntryType.Deposit,"123", 3434);
-        IEntry entry2 = new Entry(EntryType.Withdraw,"123", 3434);
-        account.addEntry(entry1);
-        account.addEntry(entry2);
-        IReport report = new MonthlyBillingReport(account);
-
-        account.generateReport(report);
-
-
-
-
         try {
             // Add the following code if you want the Look and Feel
             // to be set to the Look and Feel of the native system.
@@ -268,9 +246,9 @@ public class FinCo extends JFrame{
 		 show it
 		*/
 
-        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
-        pac.setBounds(450, 20, 300, 330);
-        pac.show();
+//        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+//        pac.setBounds(450, 20, 300, 330);
+//        pac.show();
 
         if (newaccount){
             // add row to table
@@ -340,6 +318,11 @@ public class FinCo extends JFrame{
     {
         JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 
+    }
+
+    public void addAccount(ICustomer customer, IAccount account){
+        customer.addAccount(account);
+        InstanceManager.getDAO().addCutomer(customer);
     }
 
 }

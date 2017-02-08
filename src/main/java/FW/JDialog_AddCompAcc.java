@@ -1,17 +1,20 @@
 package FW;
 
 import FW.FinCo;
+import FW.Views.DataAccessView;
 
 import java.awt.*;
+import java.util.HashMap;
 import javax.swing.*;
 
 
 
 public class JDialog_AddCompAcc extends JDialog
 {
-    private FinCo parentframe;
-    
-	public JDialog_AddCompAcc(FinCo parent)
+    private JFrame parentframe;
+    private DataAccessView controller;
+
+	public JDialog_AddCompAcc(JFrame parent, DataAccessView controller)
 	{
 		super(parent);
 		parentframe=parent;
@@ -139,17 +142,34 @@ public class JDialog_AddCompAcc extends JDialog
 
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
-       parentframe.accountnr=JTextField_ACNR.getText();
-       parentframe.clientName=JTextField_NAME.getText();
-       parentframe.street=JTextField_STR.getText();
-       parentframe.city=JTextField_CT.getText();
-       parentframe.zip=JTextField_ZIP.getText();
-       parentframe.state=JTextField_ST.getText();
-       if (JRadioButton_Chk.isSelected())
-           parentframe.accountType="Ch";
-           else
-           parentframe.accountType="S";
-	   parentframe.newaccount=true;
+        HashMap<String, String> data = new HashMap();
+        data.put("accountNumber", JTextField_ACNR.getText());
+        data.put("clientName", JTextField_NAME.getText());
+        data.put("street", JTextField_STR.getText());
+        data.put("city", JTextField_CT.getText());
+        data.put("zip", JTextField_ZIP.getText());
+        data.put("state", JTextField_ST.getText());
+        if (JRadioButton_Chk.isSelected()) {
+            data.put("accountType", "Checkings");
+        } else {
+            data.put("accountType", "Savings");
+        }
+
+//        object.acnr = JTextField_ACNR.getText();
+//        parentframe.clientName=JTextField_NAME.getText();
+//        parentframe.street=JTextField_STR.getText();
+//        parentframe.city=JTextField_CT.getText();
+//        parentframe.zip=JTextField_ZIP.getText();
+//        parentframe.state=JTextField_ST.getText();
+//        if (JRadioButton_Chk.isSelected()) {
+//           parentframe.accountType="Ch";
+//       }
+//           else {
+//           parentframe.accountType="S";
+//       }
+//        parentframe.newaccount=true;
+	   controller.setData(data);
+
 	   dispose();
 			 
 	}

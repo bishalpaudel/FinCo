@@ -10,6 +10,6 @@ import FW.Types.CustomerType;
  * Created by bishal on 2/6/17.
  */
 public interface AbstractFactory {
-    ICustomer getParty(CustomerType type);
-    IAccount getAccount(String type);
+    ICustomer getCustomer(CustomerType type);
+    IAccount getAccount(AccountType type);
 }
