@@ -1,5 +1,6 @@
 package FW.Factories;
 
+import FW.DAO.DAO;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.Customer;
 import FW.Model.Customer.ICustomer;
@@ -15,4 +16,6 @@ public interface IFactory {
     ICustomer getCustomer(CustomerType type);
     IAccount getAccount(Enum type);
 //    IEntry getEntry(EntryType type);
+    DAO getDAO(Enum type);
+
 }
