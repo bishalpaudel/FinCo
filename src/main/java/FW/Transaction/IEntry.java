@@ -7,7 +7,7 @@ import FW.Types.EntryType;
  */
 public interface IEntry {
 
-        EntryType getType();
+    EntryType getType();
         double getAmount();
         String getDate();
 

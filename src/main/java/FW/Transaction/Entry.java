@@ -15,7 +15,6 @@ public class Entry implements IEntry{
         _entryType = entryType;
         _date = date;
         _amount = amount;
-        System.out.println(amount);
     }
     public double getAmount()
     {

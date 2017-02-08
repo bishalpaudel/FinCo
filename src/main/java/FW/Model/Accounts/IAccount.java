@@ -1,5 +1,7 @@
 package FW.Model.Accounts;
 
+import FW.Model.Customer.ICustomer;
+import FW.Report.IReport;
 import FW.Transaction.IEntry;
 
 import java.util.List;
@@ -20,4 +22,9 @@ public interface IAccount {
     public Boolean addEntry(IEntry entry);
 
     public List<IEntry> getEntries();
+
+     void setCustomer(ICustomer customer);
+     ICustomer getCustomer();
+
+     void generateReport(IReport report);
 }

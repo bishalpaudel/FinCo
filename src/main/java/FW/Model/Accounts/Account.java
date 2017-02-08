@@ -1,5 +1,7 @@
 package FW.Model.Accounts;
 
+import FW.Model.Customer.ICustomer;
+import FW.Report.IReport;
 import FW.Transaction.IEntry;
 
 import java.util.ArrayList;
@@ -53,14 +55,27 @@ public class Account implements  IAccount {
         return true;
     }
 
-    public Boolean addEntry(IEntry entry)
-    {
+    public Boolean addEntry(IEntry entry) {
         entries.add(entry);
         return true;
     }
 
-    public List<IEntry> getEntries()
-    {
+    public List<IEntry> getEntries() {
         return entries;
     }
+
+    public void setCustomer(ICustomer cust)
+    {
+        customer = cust;
+    }
+    public ICustomer getCustomer()
+    {
+        return customer;
+    }
+
+    public void generateReport(IReport report)
+    {
+        report.generate();
+    }
+    private ICustomer customer;
 }

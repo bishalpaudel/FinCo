@@ -1,6 +1,8 @@
 package Bank.Model;
 
 import FW.Model.Accounts.IAccount;
+import FW.Model.Customer.ICustomer;
+import FW.Report.IReport;
 import FW.Transaction.IEntry;
 
 import java.util.ArrayList;
@@ -53,6 +55,21 @@ public class CheckingsAccount implements IAccount{
         entries.add(entry);
         return true;
     }
+
+    public void setCustomer(ICustomer cust)
+    {
+        customer = cust;
+    }
+    public ICustomer getCustomer()
+    {
+        return customer;
+    }
+
+    public void generateReport(IReport report)
+    {
+
+    }
+    private ICustomer customer;
 
     public List<IEntry> getEntries()
     {

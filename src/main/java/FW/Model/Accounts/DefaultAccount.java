@@ -1,5 +1,7 @@
 package FW.Model.Accounts;
 
+import FW.Model.Customer.ICustomer;
+import FW.Report.IReport;
 import FW.Transaction.IEntry;
 
 import java.util.List;
@@ -49,4 +51,19 @@ public class DefaultAccount implements IAccount{
     {
         return null;
     }
+
+    public void setCustomer(ICustomer customer)
+    {
+        customer = customer;
+    }
+    public ICustomer getCustomer()
+    {
+        return customer;
+    }
+
+    public void generateReport(IReport report)
+    {
+
+    }
+    private ICustomer customer;
 }
