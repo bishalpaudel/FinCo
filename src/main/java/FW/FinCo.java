@@ -9,6 +9,7 @@ import FW.Model.Customer.ICustomer;
 import FW.Observers.ICustomerChangeObserver;
 import FW.Report.IReport;
 import FW.Report.MonthlyBillingReport;
+import FW.Report.ReportGenerator;
 import FW.Singletons.InstanceManager;
 import FW.Transaction.Entry;
 import FW.Transaction.IEntry;
@@ -211,7 +212,8 @@ public class FinCo extends JFrame{
         List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
         for(IAccount account : accounts){
             IReport report= new MonthlyBillingReport(account);
-            report.generate();
+            ReportGenerator reportGenerator = new ReportGenerator(report);
+            reportGenerator.generate();
         }
     }
 

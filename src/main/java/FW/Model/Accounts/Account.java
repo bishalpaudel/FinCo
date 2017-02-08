@@ -2,6 +2,7 @@ package FW.Model.Accounts;
 
 import FW.Model.Customer.ICustomer;
 import FW.Report.IReport;
+import FW.Report.ReportGenerator;
 import FW.Transaction.Entry;
 import FW.Transaction.IEntry;
 import FW.Types.EntryType;
@@ -83,7 +84,8 @@ public abstract class Account implements  IAccount {
 
     public void generateReport(IReport report)
     {
-        report.generate();
+        ReportGenerator reportGenerator = new ReportGenerator(report);
+        reportGenerator.generate();
     }
 
     public abstract void generateInterest();
