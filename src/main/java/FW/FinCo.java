@@ -64,7 +64,7 @@ public class FinCo extends JFrame{
 //        JTable1 = new JTable(model);
 
         JTable1 = new CustomersTableView(model);
-        InstanceManager.getCustomerManagerInstance().addObserver((ICustomerChangeObserver) JTable1);
+        attachAccountChangeObserver((ICustomerChangeObserver) JTable1);
 
         newaccount=false;
 
@@ -336,10 +336,23 @@ public class FinCo extends JFrame{
     public void addAccount(ICustomer customer, IAccount account){
         customer.addAccount(account);
         InstanceManager.getDAO().addCutomer(customer);
+        notifyObservers(customer, account);
     }
 
     public void deposit(IAccount account, double amountDeposit) {
         IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), amountDeposit);
     }
 
+    private List<ICustomerChangeObserver> observers = new ArrayList();
+    public void attachAccountChangeObserver(ICustomerChangeObserver observer){
+        observers.add(observer);
+    }
+    public void detachAccountChangeObserver(ICustomerChangeObserver observer){
+        observers.remove(observer);
+    }
+    public void notifyObservers(ICustomer customer, IAccount account){
+        for(ICustomerChangeObserver observer: observers){
+            observer.update(customer, account);
+        }
+    }
 }

@@ -26,7 +26,7 @@ public class CustomerManager {
 
     public void notifyObservers(){
         for(ICustomerChangeObserver observer: observers){
-            observer.update(customers);
+//            observer.update(customers);
         }
     }
 
