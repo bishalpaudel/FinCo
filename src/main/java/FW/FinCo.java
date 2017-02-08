@@ -2,11 +2,18 @@ package FW;
 
 import FW.Controllers.Controller;
 import FW.Controllers.CustomerController;
+import FW.Model.Accounts.Account;
+import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Model.Customer.IPerson;
 import FW.Model.Customer.Person;
 import FW.Observers.ICustomerChangeObserver;
+import FW.Report.IReport;
+import FW.Report.MonthlyBillingReport;
 import FW.Singletons.InstanceManager;
+import FW.Transaction.Entry;
+import FW.Transaction.IEntry;
+import FW.Types.EntryType;
 import FW.Views.CustomersTableView;
 
 import javax.swing.*;
@@ -114,6 +121,24 @@ public class FinCo extends JFrame{
      *****************************************************/
     static public void main(String args[])
     {
+        ICustomer customer = new Person();
+        customer.setName("Akash");
+        customer.setState("Iowa");
+
+        IAccount account = new Account();
+        account.setCustomer(customer);
+
+        IEntry entry1 = new Entry(EntryType.Deposit,"123", 3434);
+        IEntry entry2 = new Entry(EntryType.Withdraw,"123", 3434);
+        account.addEntry(entry1);
+        account.addEntry(entry2);
+        IReport report = new MonthlyBillingReport(account);
+
+        account.generateReport(report);
+
+
+
+
         try {
             // Add the following code if you want the Look and Feel
             // to be set to the Look and Feel of the native system.
