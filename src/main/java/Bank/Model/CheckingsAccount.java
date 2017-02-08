@@ -19,6 +19,20 @@ public class CheckingsAccount extends Account {
     private Double interestRate = 0.0;
 
     @Override
+    public Double getBalance() {
+        Double balance = 0.0;
+        for(IEntry entry: getEntries()){
+            if(entry.getType() == EntryType.DEPOSIT){
+                balance += entry.getAmount();
+            }
+            else if(entry.getType() == EntryType.WITHDRAW){
+                balance -= entry.getAmount();
+            }
+        }
+        return  balance;
+    }
+
+    @Override
     public void generateInterest() {
         Double totalBalance = getBalance();
         Double interest = totalBalance * interestRate;

@@ -8,6 +8,7 @@ import FW.Singletons.InstanceManager;
 import FW.Views.IDataAccessView;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -19,28 +20,23 @@ public class BankWithdrawButtonClicked implements ActionListener, IDataAccessVie
 
     FinCo parentFrame;
     private String selectedAccount;
+    private Integer selectedIndex;
     public BankWithdrawButtonClicked(FinCo parentFrame) {
         this.parentFrame = parentFrame;
     }
 
     public void actionPerformed(ActionEvent event) {
         // get selected name
-        selectedAccount = parentFrame.getSelectedAccount();
-        if (selectedAccount != ""){
-            Withdraw wd = new Withdraw(parentFrame, this, selectedAccount);
+        selectedIndex = parentFrame.getSelectedIndex();
+        if(selectedIndex >= 0){
+            selectedAccount = (String) parentFrame.getMyModel().getValueAt(selectedIndex, 0);
 
-            wd.setBounds(430, 15, 275, 140);
-            wd.show();
+            if (selectedAccount != "") {
+                Withdraw wd = new Withdraw(parentFrame, this, selectedAccount);
 
-            // compute new amount
-//            long deposit = Long.parseLong(amountDeposit);
-//            String samount = (String)model.getValueAt(selection, 5);
-//            long currentamount = Long.parseLong(samount);
-//            long newamount=currentamount-deposit;
-//            model.setValueAt(String.valueOf(newamount),selection, 5);
-//            if (newamount <0){
-//                JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-//            }
+                wd.setBounds(430, 15, 275, 140);
+                wd.show();
+            }
         }
     }
 
@@ -48,6 +44,9 @@ public class BankWithdrawButtonClicked implements ActionListener, IDataAccessVie
         IAccount account = InstanceManager.getDAO().getAccount(selectedAccount);
         if(account != null){
             InstanceManager.getAppInstance().withdraw(account, Double.parseDouble(data.get("amountWithdraw")));
+            String balance = String.valueOf(account.getBalance());
+            DefaultTableModel model = parentFrame.getMyModel();
+            model.setValueAt(balance, selectedIndex, 5);
         }
     }
 

@@ -12,10 +12,25 @@ import java.util.List;
 /**
  * Created by bishal on 2/6/17.
  */
-public class DefaultAccount extends  Account implements IAccount{
+public class DefaultAccount extends  Account{
 //    private String accountNumber;
     private String abbreviation = "DEF";
     Double interestRate = 0.0;
+
+    @Override
+    public Double getBalance() {
+        Double balance = 0.0;
+        for(IEntry entry: getEntries()){
+            if(entry.getType() == EntryType.DEPOSIT){
+                balance += entry.getAmount();
+            }
+            else if(entry.getType() == EntryType.WITHDRAW){
+                balance -= entry.getAmount();
+            }
+        }
+        return  balance;
+    }
+
 
 //    public String getAccountNumber() {
 //        return accountNumber;

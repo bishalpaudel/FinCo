@@ -213,6 +213,9 @@ public class FinCo extends JFrame{
         }
     }
 
+    public Integer getSelectedIndex(){
+        return getListTable().getSelectionModel().getMinSelectionIndex();
+    }
 
     public String getSelectedAccount(){
         int selection = getListTable().getSelectionModel().getMinSelectionIndex();

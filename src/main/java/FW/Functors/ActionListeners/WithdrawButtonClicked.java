@@ -7,6 +7,7 @@ import FW.Singletons.InstanceManager;
 import FW.Views.IDataAccessView;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -18,18 +19,23 @@ public class WithdrawButtonClicked implements ActionListener, IDataAccessView {
 
     FinCo parentFrame;
     private String selectedAccount;
+    private Integer selectedIndex;
     public WithdrawButtonClicked(FinCo parentFrame) {
         this.parentFrame = parentFrame;
     }
 
     public void actionPerformed(ActionEvent event) {
-        // get selected name
-        selectedAccount = parentFrame.getSelectedAccount();
-        if (selectedAccount != ""){
-            JDialog_Withdraw wd = new JDialog_Withdraw(parentFrame, this, selectedAccount);
 
-            wd.setBounds(430, 15, 275, 140);
-            wd.show();
+        selectedIndex = parentFrame.getSelectedIndex();
+        if(selectedIndex >= 0){
+            selectedAccount = parentFrame.getSelectedAccount();
+
+            if (selectedAccount != "") {
+                JDialog_Withdraw wd = new JDialog_Withdraw(parentFrame, this, selectedAccount);
+
+                wd.setBounds(430, 15, 275, 140);
+                wd.show();
+            }
 
             // compute new amount
 //            long deposit = Long.parseLong(amountDeposit);
@@ -47,6 +53,9 @@ public class WithdrawButtonClicked implements ActionListener, IDataAccessView {
         IAccount account = InstanceManager.getDAO().getAccount(selectedAccount);
         if(account != null){
             InstanceManager.getAppInstance().withdraw(account, Double.parseDouble(data.get("amountWithdraw")));
+            String balance = String.valueOf(account.getBalance());
+            DefaultTableModel model = parentFrame.getMyModel();
+            model.setValueAt(balance, selectedIndex, 5);
         }
     }
 

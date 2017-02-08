@@ -35,9 +35,7 @@ public abstract class Account implements  IAccount {
         return abbreviation;
     }
 
-    public Double getBalance() {
-        return 0.0;
-    }
+    public abstract Double getBalance();
 
     public Boolean withdraw(IEntry withdraw) {
 
