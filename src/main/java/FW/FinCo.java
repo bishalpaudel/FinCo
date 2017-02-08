@@ -215,6 +215,7 @@ public class FinCo extends JFrame{
     public void addAccount(ICustomer customer, IAccount account){
         notifyObservers(customer, account);
         customer.addAccount(account);
+        account.setCustomer(customer);
         InstanceManager.getDAO().addCutomer(customer);
     }
 

@@ -30,6 +30,10 @@ public interface ICustomer {
 
     String getAbbreviation();
 
+    String getEmail();
+
+    void setEmail(String email);
+
     void addAccount(IAccount account);
 
     List<IAccount> getAccounts();

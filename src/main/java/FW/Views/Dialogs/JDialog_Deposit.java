@@ -84,6 +84,15 @@ public class JDialog_Deposit extends JDialog
 
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
+		try
+		{
+			 Double.parseDouble(JTextField_Deposit.getText());
+		}
+		catch(NumberFormatException ex)
+		{
+			JOptionPane.showMessageDialog(null, "Please enter numeric deposit amount !!!");
+			return;
+		}
 		HashMap<String, String> data = new HashMap();
 		data.put("amountDeposit", JTextField_Deposit.getText());
 		controller.setData(data);

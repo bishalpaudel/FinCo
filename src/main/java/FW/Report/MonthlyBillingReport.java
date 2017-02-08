@@ -2,6 +2,7 @@ package FW.Report;
 
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
+import FW.Model.Settings;
 import FW.Transaction.IEntry;
 
 import java.io.FileWriter;
@@ -26,8 +27,6 @@ public class MonthlyBillingReport implements IReport {
     public void generate()
     {
         ICustomer customer = account.getCustomer();
-//        System.out.println("Name : " + customer.getName());
-//        System.out.println("State : " + customer.getState());
 
         //TODO : Need to change logic to get monthly
         List<IEntry> entries = account.getEntries();
@@ -36,8 +35,10 @@ public class MonthlyBillingReport implements IReport {
 
         FileWriter fileWriter = null;
 
+        String filename = Settings.getExportReportDirectory() + account.getAccountNumber() + "-monthlybillingreport.csv";
+
         try {
-            fileWriter = new FileWriter("C:/Users/Akash KC/Desktop/ASD/monthlybillingreport.csv");
+            fileWriter = new FileWriter(filename);
 
             //Write the CSV file header
             fileWriter.append("Transaction Type, Date, Amount");

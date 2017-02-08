@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Customer implements ICustomer {
 
-    private String name, street, city, state, zip;
+    private String name, street, city, state, zip,email;
     private List<IAccount> accounts = new ArrayList();
 
     public String getName() {
@@ -55,6 +55,15 @@ public class Customer implements ICustomer {
 
     public String getAbbreviation() {
         return "CUST";
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+    public void setEmail(String strEmail)
+    {
+        email = strEmail;
     }
 
     @Override
