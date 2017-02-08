@@ -4,15 +4,14 @@ import FW.Controllers.Controller;
 import FW.Controllers.CustomerController;
 import FW.Factories.AbstractFactory;
 import FW.Factories.DefaultFactory;
-import FW.Functors.ActionListeners.AddCompanyButtonClicked;
-import FW.Functors.ActionListeners.AddPersonButtonClicked;
-import FW.Functors.ActionListeners.DepositButtonClicked;
-import FW.Functors.ActionListeners.WithdrawButtonClicked;
+import FW.Functors.ActionListeners.*;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Model.Customer.IPerson;
 import FW.Model.Customer.Person;
 import FW.Observers.ICustomerChangeObserver;
+import FW.Report.IReport;
+import FW.Report.MonthlyBillingReport;
 import FW.Singletons.InstanceManager;
 import FW.Transaction.Entry;
 import FW.Transaction.IEntry;
@@ -47,6 +46,7 @@ public class FinCo extends JFrame{
     JButton JButton_Deposit = new JButton();
     JButton JButton_Withdraw = new JButton();
     JButton JButton_Addinterest= new JButton();
+    JButton JButton_MonthlyReport= new JButton();
     JButton JButton_Exit = new JButton();
 
     public FinCo() {
@@ -81,19 +81,28 @@ public class FinCo extends JFrame{
         JButton_PerAC.setText("Add personal account");
         JPanel1.add(JButton_PerAC);
         JButton_PerAC.setBounds(24,20,192,33);
+
         JButton_CompAC.setText("Add company account");
         JButton_CompAC.setActionCommand("jbutton");
         JPanel1.add(JButton_CompAC);
         JButton_CompAC.setBounds(240,20,192,33);
+
         JButton_Deposit.setText("Deposit");
         JPanel1.add(JButton_Deposit);
         JButton_Deposit.setBounds(468,104,96,33);
+
         JButton_Withdraw.setText("Withdraw");
         JPanel1.add(JButton_Withdraw);
+        JButton_Withdraw.setBounds(468,164,96,33);
+
         JButton_Addinterest.setBounds(448,20,106,33);
         JButton_Addinterest.setText("Add interest");
         JPanel1.add(JButton_Addinterest);
-        JButton_Withdraw.setBounds(468,164,96,33);
+
+        JButton_MonthlyReport.setBounds(468,164,96,33);
+        JButton_MonthlyReport.setText("Generate Report");
+        JPanel1.add(JButton_MonthlyReport);
+
         JButton_Exit.setText("Exit");
         JPanel1.add(JButton_Exit);
         JButton_Exit.setBounds(468,248,96,31);
@@ -111,7 +120,8 @@ public class FinCo extends JFrame{
         JButton_CompAC.addActionListener(new AddCompanyButtonClicked(this));
         JButton_Deposit.addActionListener(new DepositButtonClicked(this));
         JButton_Withdraw.addActionListener(new WithdrawButtonClicked(this));
-        JButton_Addinterest.addActionListener(lSymAction);
+        JButton_Addinterest.addActionListener(new AddInterestButtonClicked(this));
+        JButton_MonthlyReport.addActionListener(new MonthlyReportButtonClicked(this));
 
         setFactory(new DefaultFactory());
 
@@ -165,6 +175,14 @@ public class FinCo extends JFrame{
         }
     }
 
+    public void generateReport() {
+        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
+        for(IAccount account : accounts){
+            IReport report= new MonthlyBillingReport(account);
+            report.generate();
+        }
+    }
+
 
     class SymWindow extends java.awt.event.WindowAdapter
     {
@@ -205,8 +223,8 @@ public class FinCo extends JFrame{
 //                JButtonDeposit_actionPerformed(event);
 //            else if (object == JButton_Withdraw)
 //                JButtonWithdraw_actionPerformed(event);
-            else if (object == JButton_Addinterest)
-                JButtonAddinterest_actionPerformed(event);
+//            else if (object == JButton_Addinterest)
+//                JButtonAddinterest_actionPerformed(event);
 
         }
     }

@@ -69,6 +69,11 @@ public class CheckingsAccount implements IAccount{
     {
 
     }
+
+    public void generateInterest() {
+
+    }
+
     private ICustomer customer;
 
     public List<IEntry> getEntries()

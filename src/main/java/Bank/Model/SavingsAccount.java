@@ -67,6 +67,11 @@ public class SavingsAccount implements IAccount{
     {
 
     }
+
+    public void generateInterest() {
+
+    }
+
     private ICustomer customer;
 
     public List<IEntry> getEntries()
