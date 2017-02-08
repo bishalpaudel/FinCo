@@ -58,10 +58,13 @@ public abstract class Account implements  IAccount {
     public Boolean addEntry(IEntry entry) {
         entries.add(entry);
 
-        if(this.getCustomer().getAbbreviation().equals("COM")&& entry.getAmount() > 500)
+
+        if(this.getCustomer().getAbbreviation().equals("COM") || (this.getCustomer().getAbbreviation().equals("PER")&& entry.getAmount() > 500))
         {
                 System.out.println("Your transaction has exceeded 500. Email has been sent to " + this.getCustomer().getEmail());
         }
+
+
         return true;
     }
 
