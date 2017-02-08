@@ -25,8 +25,19 @@ public class SimpleDAO implements DAO {
         System.out.println(customer.getName());
     }
 
+    // Get all accounts available from all customers
     public List<IAccount> getAccounts() {
-        return accounts;
+
+        List<IAccount> listAccounts = new ArrayList<IAccount>();
+
+        for(ICustomer customer : getCustomers())
+        {
+            for (IAccount account : customer.getAccounts())
+            {
+                listAccounts.add(account);
+            }
+        }
+        return listAccounts;
     }
 
     public void addAccount(IAccount account){
