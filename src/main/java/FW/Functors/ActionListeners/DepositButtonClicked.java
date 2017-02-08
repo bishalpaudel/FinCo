@@ -25,7 +25,7 @@ public class DepositButtonClicked implements ActionListener, DataAccessView {
 
     public void actionPerformed(ActionEvent event) {
         // get selected name
-        String selectedAccount = parentFrame.getSelectedAccount();
+        selectedAccount = parentFrame.getSelectedAccount();
         if (selectedAccount != ""){
             JDialog_Deposit wd = new JDialog_Deposit(parentFrame, this, selectedAccount);
 
