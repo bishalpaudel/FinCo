@@ -5,6 +5,7 @@ package Bank;
  */
 import Bank.ActionListeners.*;
 import Bank.Factories.BankFactory;
+import Bank.Views.BankCustomersTableView;
 import FW.Factories.DefaultFactory;
 import FW.FinCo;
 import FW.Functors.ActionListeners.*;
@@ -84,7 +85,7 @@ public class Bank extends FinCo{
         JPanel1.add(JScrollPane1);
         JScrollPane1.setBounds(12,92,444,160);
         myModel = new DefaultTableModel();
-        JTable1 = new CustomersTableView(myModel);
+        JTable1 = new BankCustomersTableView(myModel);
         attachAccountChangeObserver((ICustomerChangeObserver) JTable1);
         JTable1.setBounds(0, 0, 420, 0);
         JScrollPane1.getViewport().add(JTable1);
@@ -172,6 +173,16 @@ public class Bank extends FinCo{
             if (object == JButton_Exit)
                 System.exit(0);
         }
+    }
+
+    @Override
+    public JTable getListTable(){
+        return JTable1;
+    }
+
+    @Override
+    public DefaultTableModel getMyModel(){
+        return myModel;
     }
 
 }

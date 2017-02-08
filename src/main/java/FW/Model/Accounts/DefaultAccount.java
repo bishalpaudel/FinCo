@@ -13,17 +13,17 @@ import java.util.List;
  * Created by bishal on 2/6/17.
  */
 public class DefaultAccount extends  Account implements IAccount{
-    private String accountNumber;
+//    private String accountNumber;
     private String abbreviation = "DEF";
     Double interestRate = 0.0;
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
+//    public String getAccountNumber() {
+//        return accountNumber;
+//    }
+//
+//    public void setAccountNumber(String accountNumber) {
+//        this.accountNumber = accountNumber;
+//    }
 
     public String getAbbreviation() {
         return abbreviation;

@@ -42,7 +42,10 @@ public class AddBankCompanyButtonClicked implements ActionListener, IDataAccessV
             account = InstanceManager.getFactoryInstance().getAccount(AccountType.CHECKINGS); //for CheckingsAccount
         }
 
+        System.out.println("---------");
+        System.out.println(data.get("accountNumber"));
         account.setAccountNumber(data.get("accountNumber"));
+        System.out.println(account.getAccountNumber());
 
         ICustomer customer = InstanceManager.getFactoryInstance().getCustomer(CustomerType.COMPANY);
         customer.setName(data.get("city"));

@@ -1,85 +1,27 @@
 package Bank.Model;
 
+import FW.Model.Accounts.Account;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Report.IReport;
+import FW.Transaction.Entry;
 import FW.Transaction.IEntry;
+import FW.Types.EntryType;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by bishal on 2/6/17.
  */
-public class CheckingsAccount implements IAccount{
+public class CheckingsAccount extends Account {
+    private Double interestRate = 0.0;
 
-    private List<IEntry> entries = new ArrayList<IEntry>();
-    public String getAccountNumber() {
-        return null;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-
-    }
-
-    public Double getBalance() {
-        return 0.0;
-    }
-
-    public String getAbbreviation() {
-        return "Checking";
-    }
-
-    public Boolean withdraw(IEntry withdraw) {
-
-
-        // Update the logic to withdraw
-        entries.add(withdraw);
-        return true;
-    }
-
-    public Boolean deposit(IEntry deposit) {
-
-        entries.add(deposit);
-        return true;
-    }
-
-    public Boolean addInterest(Double interestAmt) {
-        interest = interestAmt;
-        // Update logic to update new interest
-        return true;
-    }
-
-    public Boolean addEntry(IEntry entry)
-    {
-        entries.add(entry);
-        return true;
-    }
-
-    public void setCustomer(ICustomer cust)
-    {
-        customer = cust;
-    }
-    public ICustomer getCustomer()
-    {
-        return customer;
-    }
-
-    public void generateReport(IReport report)
-    {
-
-    }
-
+    @Override
     public void generateInterest() {
-
+        Double totalBalance = getBalance();
+        Double interest = totalBalance * interestRate;
+        IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), interest);
     }
-
-    private ICustomer customer;
-
-    public List<IEntry> getEntries()
-    {
-        return entries;
-    }
-
-    private Double interest = 0.0;
 }

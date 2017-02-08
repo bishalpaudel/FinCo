@@ -189,6 +189,14 @@ public class FinCo extends JFrame{
         }
     }
 
+    public JTable getListTable(){
+        return JTable1;
+    }
+
+    public DefaultTableModel getMyModel(){
+        return myModel;
+    }
+
 
     public void addInterestToAllAccounts() {
         List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
@@ -207,12 +215,13 @@ public class FinCo extends JFrame{
 
 
     public String getSelectedAccount(){
-        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        return selection >= 0 ? (String) myModel.getValueAt(selection, 0) : "";
+        int selection = getListTable().getSelectionModel().getMinSelectionIndex();
+        return selection >= 0 ? (String) getMyModel().getValueAt(selection, 0) : "";
     }
 
 
     public void addAccount(ICustomer customer, IAccount account){
+        String accountNum = account.getAccountNumber();
         notifyObservers(customer, account);
         customer.addAccount(account);
         account.setCustomer(customer);

@@ -1,4 +1,4 @@
-package FW.Views;
+package Bank.Views;
 
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
@@ -6,16 +6,15 @@ import FW.Observers.ICustomerChangeObserver;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.List;
 
 /**
  * Created by bishal on 2/6/17.
  */
-public class CustomersTableView extends JTable implements ICustomerChangeObserver {
+public class BankCustomersTableView extends JTable implements ICustomerChangeObserver {
 
     DefaultTableModel model;
 
-    public CustomersTableView(DefaultTableModel model1) {
+    public BankCustomersTableView(DefaultTableModel model1) {
         super(model1);
         model = model1;
         model.addColumn("AccountNr");
@@ -34,9 +33,7 @@ public class CustomersTableView extends JTable implements ICustomerChangeObserve
         rowdata[3] = customer.getAbbreviation();
         rowdata[4] = account.getAbbreviation();
         rowdata[5] = account.getBalance().toString();
-        for(Object o: rowdata){
-            System.out.println(o);
-        }
+
         model.addRow(rowdata);
         getSelectionModel().setAnchorSelectionIndex(-1);
     }

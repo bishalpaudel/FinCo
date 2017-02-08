@@ -21,7 +21,7 @@ public class CustomersTableView extends JTable implements ICustomerChangeObserve
         model.addColumn("AccountNr");
         model.addColumn("Name");
         model.addColumn("City");
-        model.addColumn("P/C");
+        model.addColumn("Type");
         model.addColumn("Type");
         model.addColumn("Amount");
     }

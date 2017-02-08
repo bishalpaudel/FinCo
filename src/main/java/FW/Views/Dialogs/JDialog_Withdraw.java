@@ -1,7 +1,7 @@
-package FW;
+package FW.Views.Dialogs;
 
 import FW.FinCo;
-import FW.Views.DataAccessView;
+import FW.Views.IDataAccessView;
 import FW.Views.IDataAccessView;
 
 import java.awt.*;
@@ -64,7 +64,6 @@ public class JDialog_Withdraw extends JDialog
 		JButton_Calcel.addActionListener(lSymAction);
 		
 	}
-
 
 
 	
