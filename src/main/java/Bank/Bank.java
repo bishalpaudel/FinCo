@@ -1,17 +1,15 @@
-package FW;
+package Bank;
 
-import FW.Factories.IFactory;
+/**
+ * Created by bishal on 2/6/17.
+ */
+import Bank.ActionListeners.*;
+import Bank.Factories.BankFactory;
 import FW.Factories.DefaultFactory;
+import FW.FinCo;
 import FW.Functors.ActionListeners.*;
-import FW.Model.Accounts.IAccount;
-import FW.Model.Customer.ICustomer;
 import FW.Observers.ICustomerChangeObserver;
-import FW.Report.IReport;
-import FW.Report.MonthlyBillingReport;
 import FW.Singletons.InstanceManager;
-import FW.Transaction.Entry;
-import FW.Transaction.IEntry;
-import FW.Types.EntryType;
 import FW.Views.CustomersTableView;
 
 import javax.swing.*;
@@ -19,14 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-/**
- * Created by bishal on 2/6/17.
- */
-public class FinCo extends JFrame{
+public class Bank extends FinCo{
+
     boolean newaccount;
     private DefaultTableModel myModel;
     private JTable JTable1;
@@ -43,15 +36,13 @@ public class FinCo extends JFrame{
     JButton JButton_Exit = new JButton();
 
 
-
-    public void setFactory(IFactory factory) {
-        InstanceManager.setFactoryInstance(factory);
+    public Bank(){
+        InstanceManager.setAppInstance(this);
+        setFactory(new BankFactory());
+        initializeViews();
     }
-    /*****************************************************
-     * The entry point for this application.
-     * Sets the Look and Feel to the System Look and Feel.
-     * Creates a new JFrame1 and makes it visible.
-     *****************************************************/
+
+
     static public void main(String args[])
     {
         try {
@@ -65,13 +56,7 @@ public class FinCo extends JFrame{
             }
 
             //Create a new instance of our application's frame, and make it visible.
-            FinCo finco = new FinCo();
-            finco.initializeViews();
-
-            InstanceManager.setAppInstance(finco);
-            InstanceManager.setFactoryInstance(new DefaultFactory());
-            finco.setVisible(true);
-//            (new FinCo()).setVisible(true);
+            (new Bank()).setVisible(true);
         }
         catch (Throwable t) {
             t.printStackTrace();
@@ -134,16 +119,16 @@ public class FinCo extends JFrame{
         JPanel1.add(JButton_Exit);
         JButton_Exit.setBounds(468,248,150,31);
 
-        FinCo.SymWindow aSymWindow = new FinCo.SymWindow();
+        SymWindow aSymWindow = new SymWindow();
         this.addWindowListener(aSymWindow);
-        FinCo.SymAction lSymAction = new FinCo.SymAction();
+        SymAction lSymAction = new SymAction();
         JButton_Exit.addActionListener(lSymAction);
-        JButton_PerAC.addActionListener(new AddPersonButtonClicked(this));
-        JButton_CompAC.addActionListener(new AddCompanyButtonClicked(this));
-        JButton_Deposit.addActionListener(new DepositButtonClicked(this));
-        JButton_Withdraw.addActionListener(new WithdrawButtonClicked(this));
-        JButton_Addinterest.addActionListener(new AddInterestButtonClicked(this));
-        JButton_MonthlyReport.addActionListener(new MonthlyReportButtonClicked(this));
+        JButton_PerAC.addActionListener(new AddBankPersonButtonClicked(this));
+        JButton_CompAC.addActionListener(new AddBankCompanyButtonClicked(this));
+        JButton_Deposit.addActionListener(new BankDepositButtonClicked(this));
+        JButton_Withdraw.addActionListener(new BankWithdrawButtonClicked(this));
+        JButton_Addinterest.addActionListener(new AddBankInterestButtonClicked(this));
+        JButton_MonthlyReport.addActionListener(new BankMonthlyReportButtonClicked(this));
 
     }
 
@@ -162,7 +147,7 @@ public class FinCo extends JFrame{
         public void windowClosing(WindowEvent event)
         {
             Object object = event.getSource();
-            if (object == FinCo.this)
+            if (object == Bank.this)
                 BankFrm_windowClosing(event);
         }
     }
@@ -189,56 +174,4 @@ public class FinCo extends JFrame{
         }
     }
 
-
-    public void addInterestToAllAccounts() {
-        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
-        for(IAccount account : accounts){
-            account.generateInterest();
-        }
-    }
-
-    public void generateReport() {
-        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
-        for(IAccount account : accounts){
-            IReport report= new MonthlyBillingReport(account);
-            report.generate();
-        }
-    }
-
-
-    public String getSelectedAccount(){
-        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        return selection >= 0 ? (String) myModel.getValueAt(selection, 0) : "";
-    }
-
-
-    public void addAccount(ICustomer customer, IAccount account){
-        notifyObservers(customer, account);
-        customer.addAccount(account);
-        InstanceManager.getDAO().addCutomer(customer);
-    }
-
-    public void deposit(IAccount account, double amountDeposit) {
-        IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), amountDeposit);
-        account.addEntry(entry);
-    }
-
-    public void withdraw(IAccount account, double amountWithdraw) {
-        IEntry entry = new Entry(EntryType.WITHDRAW, new Date().toString(), amountWithdraw);
-        account.addEntry(entry);
-    }
-
-
-    private List<ICustomerChangeObserver> observers = new ArrayList();
-    public void attachAccountChangeObserver(ICustomerChangeObserver observer){
-        observers.add(observer);
-    }
-    public void detachAccountChangeObserver(ICustomerChangeObserver observer){
-        observers.remove(observer);
-    }
-    public void notifyObservers(ICustomer customer, IAccount account){
-        for(ICustomerChangeObserver observer: observers){
-            observer.doUpdate(customer, account);
-        }
-    }
 }

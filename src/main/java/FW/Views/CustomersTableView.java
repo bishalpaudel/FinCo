@@ -22,29 +22,22 @@ public class CustomersTableView extends JTable implements ICustomerChangeObserve
         model.addColumn("Name");
         model.addColumn("City");
         model.addColumn("P/C");
-        model.addColumn("Ch/S");
+        model.addColumn("Type");
         model.addColumn("Amount");
     }
 
     public void doUpdate(ICustomer customer, IAccount account) {
-
-//        model.setRowCount(0);
-//        for(ICustomer customer : customers){
-//            for(IAccount account: customer.getAccounts()){\
-
-                Object rowdata[] = new Object[6];
-                rowdata[0] = account.getAccountNumber();
-                rowdata[1] = customer.getName();
-                rowdata[2] = customer.getCity();
-                rowdata[3] = customer.getAbbreviation();
-                rowdata[4] = account.getAbbreviation();
-                rowdata[5] = account.getBalance().toString();
-                for(Object o: rowdata){
-                    System.out.println(o);
-                }
-                model.addRow(rowdata);
-                getSelectionModel().setAnchorSelectionIndex(-1);
-//            }
-//        }
+        Object rowdata[] = new Object[6];
+        rowdata[0] = account.getAccountNumber();
+        rowdata[1] = customer.getName();
+        rowdata[2] = customer.getCity();
+        rowdata[3] = customer.getAbbreviation();
+        rowdata[4] = account.getAbbreviation();
+        rowdata[5] = account.getBalance().toString();
+        for(Object o: rowdata){
+            System.out.println(o);
+        }
+        model.addRow(rowdata);
+        getSelectionModel().setAnchorSelectionIndex(-1);
     }
 }

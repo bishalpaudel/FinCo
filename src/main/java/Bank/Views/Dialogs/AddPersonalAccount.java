@@ -1,25 +1,19 @@
-package FW;/*
+package Bank.Views.Dialogs;/*
 		A basic implementation of the JDialog class.
 */
 
-import FW.FinCo;
-import FW.Model.Accounts.DefaultAccount;
-import FW.Model.Accounts.IAccount;
-import FW.Model.Customer.ICustomer;
-import FW.Model.Customer.IPerson;
-import FW.Model.Customer.Person;
-import FW.Views.DataAccessView;
+import FW.Views.IDataAccessView;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import javax.swing.*;
 
-public class JDialog_AddPAcc extends JDialog
+public class AddPersonalAccount extends JDialog
 {
     private JFrame parentframe;
-    private DataAccessView controller;
+    private IDataAccessView controller;
 
-    public JDialog_AddPAcc(JFrame parent, DataAccessView controller)
+    public AddPersonalAccount(JFrame parent, IDataAccessView controller)
     {
         super(parent);
         parentframe=parent;

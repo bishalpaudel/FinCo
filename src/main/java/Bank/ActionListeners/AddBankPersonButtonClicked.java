@@ -1,10 +1,12 @@
-package FW.Functors.ActionListeners;
+package Bank.ActionListeners;
 
+import Bank.Types.AccountType;
+import Bank.Views.Dialogs.AddPersonalAccount;
+import FW.Factories.IFactory;
 import FW.Views.Dialogs.JDialog_AddPAcc;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Singletons.InstanceManager;
-import FW.Types.AccountType;
 import FW.Types.CustomerType;
 import FW.Views.IDataAccessView;
 
@@ -16,16 +18,16 @@ import java.util.HashMap;
 /**
  * Created by bishal on 2/6/17.
  */
-public class AddPersonButtonClicked implements ActionListener, IDataAccessView {
+public class AddBankPersonButtonClicked implements ActionListener, IDataAccessView {
 
     JFrame parentFrame;
-    public AddPersonButtonClicked(JFrame parentFrame) {
+    public AddBankPersonButtonClicked(JFrame parentFrame) {
         this.parentFrame = parentFrame;
     }
 
     public void actionPerformed(ActionEvent event) {
 //        FinCo finCoForm=null;
-        JDialog_AddPAcc pac = new JDialog_AddPAcc(parentFrame, this);
+        AddPersonalAccount pac = new AddPersonalAccount(parentFrame, this);
         pac.setBounds(450, 20, 300, 330);
         pac.show();
 
@@ -44,7 +46,16 @@ public class AddPersonButtonClicked implements ActionListener, IDataAccessView {
     }
 
     public void setData(HashMap<String, String> data){
-        IAccount account = InstanceManager.getFactoryInstance().getAccount(AccountType.DEFAULT);
+        IAccount account;// = InstanceManager.getFactoryInstance().getAccount(FW.Types.AccountType.DEFAULT);
+
+        if(data.get("accountType").equals("Savings")){
+            account = InstanceManager.getFactoryInstance().getAccount(AccountType.SAVINGS); // for savingsAccount
+        }
+        else {
+//            if(data.get("accountType").equals("Savings")){
+            account = InstanceManager.getFactoryInstance().getAccount(AccountType.CHECKINGS); //for CheckingsAccount
+        }
+
         account.setAccountNumber(data.get("accountNumber"));
 
         ICustomer customer = InstanceManager.getFactoryInstance().getCustomer(CustomerType.PERSON);

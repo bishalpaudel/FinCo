@@ -1,10 +1,8 @@
 package FW.Functors.ActionListeners;
 
 import FW.FinCo;
-import FW.JDialog_Withdraw;
-import FW.Model.Accounts.IAccount;
 import FW.Singletons.InstanceManager;
-import FW.Views.DataAccessView;
+import FW.Views.IDataAccessView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +12,7 @@ import java.util.HashMap;
 /**
  * Created by bishal on 2/6/17.
  */
-public class AddInterestButtonClicked implements ActionListener, DataAccessView {
+public class AddInterestButtonClicked implements ActionListener, IDataAccessView {
 
     FinCo parentFrame;
     public AddInterestButtonClicked(FinCo parentFrame) {

@@ -1,18 +1,20 @@
 package FW.Factories;
 
-import FW.Model.Accounts.IAccount;
-import FW.Model.Customer.Customer;
+import FW.Model.Customer.Company;
 import FW.Model.Customer.ICustomer;
-import FW.Transaction.IEntry;
-import FW.Types.AccountType;
+import FW.Model.Customer.Person;
 import FW.Types.CustomerType;
-import FW.Types.EntryType;
 
 /**
- * Created by bishal on 2/6/17.
+ * Created by bishal on 2/8/17.
  */
-public interface AbstractFactory {
-    ICustomer getCustomer(CustomerType type);
-    IAccount getAccount(AccountType type);
-//    IEntry getEntry(EntryType type);
+public abstract class AbstractFactory implements IFactory {
+    public ICustomer getCustomer(CustomerType type) {
+        if(type == CustomerType.COMPANY){
+            return new Company();
+        }else if(type == CustomerType.PERSON){
+            return new Person();
+        }
+        return null;
+    }
 }

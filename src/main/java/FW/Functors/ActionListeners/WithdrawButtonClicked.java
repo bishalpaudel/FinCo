@@ -1,15 +1,10 @@
 package FW.Functors.ActionListeners;
 
-import FW.Factories.AbstractFactory;
 import FW.FinCo;
-import FW.JDialog_AddPAcc;
-import FW.JDialog_Withdraw;
+import FW.Views.Dialogs.JDialog_Withdraw;
 import FW.Model.Accounts.IAccount;
-import FW.Model.Customer.ICustomer;
 import FW.Singletons.InstanceManager;
-import FW.Types.AccountType;
-import FW.Types.CustomerType;
-import FW.Views.DataAccessView;
+import FW.Views.IDataAccessView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +14,7 @@ import java.util.HashMap;
 /**
  * Created by bishal on 2/6/17.
  */
-public class WithdrawButtonClicked implements ActionListener, DataAccessView {
+public class WithdrawButtonClicked implements ActionListener, IDataAccessView {
 
     FinCo parentFrame;
     private String selectedAccount;

@@ -1,7 +1,8 @@
-package FW.Functors.ActionListeners;
+package Bank.ActionListeners;
 
+import Bank.Views.Dialogs.Withdraw;
 import FW.FinCo;
-import FW.Views.Dialogs.JDialog_Deposit;
+import FW.Views.Dialogs.JDialog_Withdraw;
 import FW.Model.Accounts.IAccount;
 import FW.Singletons.InstanceManager;
 import FW.Views.IDataAccessView;
@@ -14,19 +15,19 @@ import java.util.HashMap;
 /**
  * Created by bishal on 2/6/17.
  */
-public class DepositButtonClicked implements ActionListener, IDataAccessView {
+public class BankWithdrawButtonClicked implements ActionListener, IDataAccessView {
 
     FinCo parentFrame;
     private String selectedAccount;
-    public DepositButtonClicked(FinCo parentFrame) {
+    public BankWithdrawButtonClicked(FinCo parentFrame) {
         this.parentFrame = parentFrame;
     }
 
     public void actionPerformed(ActionEvent event) {
         // get selected name
-        String selectedAccount = parentFrame.getSelectedAccount();
+        selectedAccount = parentFrame.getSelectedAccount();
         if (selectedAccount != ""){
-            JDialog_Deposit wd = new JDialog_Deposit(parentFrame, this, selectedAccount);
+            Withdraw wd = new Withdraw(parentFrame, this, selectedAccount);
 
             wd.setBounds(430, 15, 275, 140);
             wd.show();
@@ -45,7 +46,9 @@ public class DepositButtonClicked implements ActionListener, IDataAccessView {
 
     public void setData(HashMap<String, String> data){
         IAccount account = InstanceManager.getDAO().getAccount(selectedAccount);
-        InstanceManager.getAppInstance().deposit(account, Double.parseDouble(data.get("amountDeposit")));
+        if(account != null){
+            InstanceManager.getAppInstance().withdraw(account, Double.parseDouble(data.get("amountWithdraw")));
+        }
     }
 
     public JFrame getParentFrame(){

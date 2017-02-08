@@ -2,18 +2,16 @@ package FW.Singletons;
 
 import FW.DAO.DAO;
 import FW.DAO.SimpleDAO;
-import FW.Factories.AbstractFactory;
+import FW.Factories.IFactory;
 import FW.FinCo;
-import FW.Managers.CustomerManager;
 
 /**
  * Created by bishal on 2/6/17.
  */
 public class InstanceManager {
     private static FinCo appInstance = null;
-    private static CustomerManager customerManagerInstance = null;
     private static DAO DAOInstance = null;
-    private static AbstractFactory factoryInstance = null;
+    private static IFactory factoryInstance = null;
 
     protected InstanceManager() {
         // Don't allow instantiation
@@ -30,16 +28,6 @@ public class InstanceManager {
         return appInstance;
     }
 
-    public static CustomerManager getCustomerManagerInstance() {
-        if (customerManagerInstance == null) {
-            customerManagerInstance = new CustomerManager();
-        }
-        return customerManagerInstance;
-    }
-
-    public static void setCustomerManagerInstance(CustomerManager customerManagerInstance) {
-        InstanceManager.customerManagerInstance = customerManagerInstance;
-    }
 
     public static DAO getDAO() {
         if (DAOInstance == null) {
@@ -52,11 +40,11 @@ public class InstanceManager {
         InstanceManager.DAOInstance = DAOInstance;
     }
 
-    public static void setFactoryInstance(AbstractFactory fi) {
+    public static void setFactoryInstance(IFactory fi) {
         factoryInstance = fi;
     }
 
-    public static AbstractFactory getFactoryInstance(){
+    public static IFactory getFactoryInstance(){
         return factoryInstance;
     }
 }

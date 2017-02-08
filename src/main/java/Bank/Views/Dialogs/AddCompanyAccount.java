@@ -1,20 +1,18 @@
-package FW;
+package Bank.Views.Dialogs;
 
-import FW.FinCo;
-import FW.Views.DataAccessView;
+import FW.Views.IDataAccessView;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import javax.swing.*;
 
 
-
-public class JDialog_AddCompAcc extends JDialog
+public class AddCompanyAccount extends JDialog
 {
     private JFrame parentframe;
-    private DataAccessView controller;
+    private IDataAccessView controller;
 
-	public JDialog_AddCompAcc(JFrame parent, DataAccessView controller)
+	public AddCompanyAccount(JFrame parent, IDataAccessView controller)
 	{
 		super(parent);
 		parentframe=parent;

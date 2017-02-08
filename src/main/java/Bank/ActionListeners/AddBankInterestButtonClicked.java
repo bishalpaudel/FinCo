@@ -1,4 +1,4 @@
-package FW.Functors.ActionListeners;
+package Bank.ActionListeners;
 
 import FW.FinCo;
 import FW.Singletons.InstanceManager;
@@ -12,15 +12,15 @@ import java.util.HashMap;
 /**
  * Created by bishal on 2/6/17.
  */
-public class MonthlyReportButtonClicked implements ActionListener, IDataAccessView {
+public class AddBankInterestButtonClicked implements ActionListener, IDataAccessView {
 
     FinCo parentFrame;
-    public MonthlyReportButtonClicked(FinCo parentFrame) {
+    public AddBankInterestButtonClicked(FinCo parentFrame) {
         this.parentFrame = parentFrame;
     }
 
     public void actionPerformed(ActionEvent event) {
-        InstanceManager.getAppInstance().generateReport();
+        InstanceManager.getAppInstance().addInterestToAllAccounts();
     }
 
     public void setData(HashMap<String, String> data){

@@ -1,37 +1,24 @@
 package Bank.Factories;
 
 import Bank.Model.CheckingsAccount;
+import FW.Factories.AbstractFactory;
 import FW.Model.Accounts.IAccount;
-import FW.Model.Customer.Company;
 import FW.Model.Customer.ICustomer;
 import Bank.Model.SavingsAccount;
-import FW.Factories.AbstractFactory;
-import FW.Model.Customer.Person;
+import FW.Factories.IFactory;
 import FW.Types.AccountType;
 import FW.Types.CustomerType;
 
 /**
  * Created by bishal on 2/6/17.
  */
-public class BankFactory implements AbstractFactory {
+public class BankFactory extends AbstractFactory {
 
-    public ICustomer getParty(CustomerType type) {
-        return null;
-    }
-
-    public IAccount getAccount(String type) {
-        if(type == "savings")
+    public IAccount getAccount(Enum type) {
+        if(type == Bank.Types.AccountType.SAVINGS)
             return new SavingsAccount();
-        else if(type == "checkings")
+        else if(type == Bank.Types.AccountType.CHECKINGS)
             return new CheckingsAccount();
-        return null;
-    }
-
-    public ICustomer getCustomer(CustomerType type) {
-        return null;
-    }
-
-    public IAccount getAccount(AccountType type) {
         return null;
     }
 }

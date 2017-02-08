@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * Created by Dev on 2/7/2017.
  */
-public interface DataAccessView {
+public interface IDataAccessView {
     void setData(HashMap<String, String> data);
     JFrame getParentFrame();
 }

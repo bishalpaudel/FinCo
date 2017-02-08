@@ -1,5 +1,6 @@
-package FW.Functors.ActionListeners;
+package Bank.ActionListeners;
 
+import Bank.Views.Dialogs.Deposit;
 import FW.FinCo;
 import FW.Views.Dialogs.JDialog_Deposit;
 import FW.Model.Accounts.IAccount;
@@ -14,11 +15,11 @@ import java.util.HashMap;
 /**
  * Created by bishal on 2/6/17.
  */
-public class DepositButtonClicked implements ActionListener, IDataAccessView {
+public class BankDepositButtonClicked implements ActionListener, IDataAccessView {
 
     FinCo parentFrame;
     private String selectedAccount;
-    public DepositButtonClicked(FinCo parentFrame) {
+    public BankDepositButtonClicked(FinCo parentFrame) {
         this.parentFrame = parentFrame;
     }
 
@@ -26,7 +27,7 @@ public class DepositButtonClicked implements ActionListener, IDataAccessView {
         // get selected name
         String selectedAccount = parentFrame.getSelectedAccount();
         if (selectedAccount != ""){
-            JDialog_Deposit wd = new JDialog_Deposit(parentFrame, this, selectedAccount);
+            Deposit wd = new Deposit(parentFrame, this, selectedAccount);
 
             wd.setBounds(430, 15, 275, 140);
             wd.show();
