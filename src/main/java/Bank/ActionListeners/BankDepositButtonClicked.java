@@ -1,6 +1,6 @@
 package Bank.ActionListeners;
 
-import Bank.Views.Dialogs.Deposit;
+import Bank.Views.Dialogs.DepositForm;
 import FW.FinCo;
 import FW.Model.Accounts.IAccount;
 import FW.Singletons.InstanceManager;
@@ -30,7 +30,7 @@ public class BankDepositButtonClicked implements ActionListener, IDataAccessView
         if(selectedIndex >= 0){
             selectedAccount = (String) parentFrame.getMyModel().getValueAt(selectedIndex, 0);
             if (selectedAccount != ""){
-                Deposit wd = new Deposit(parentFrame, this, selectedAccount);
+                DepositForm wd = new DepositForm(parentFrame, this, selectedAccount);
 
                 wd.setBounds(430, 15, 275, 140);
                 wd.show();

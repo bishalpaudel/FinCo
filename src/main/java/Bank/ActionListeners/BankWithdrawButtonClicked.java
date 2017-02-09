@@ -1,6 +1,6 @@
 package Bank.ActionListeners;
 
-import Bank.Views.Dialogs.Withdraw;
+import Bank.Views.Dialogs.WithdrawForm;
 import FW.FinCo;
 import FW.Model.Accounts.IAccount;
 import FW.Singletons.InstanceManager;
@@ -31,7 +31,7 @@ public class BankWithdrawButtonClicked implements ActionListener, IDataAccessVie
             selectedAccount = (String) parentFrame.getMyModel().getValueAt(selectedIndex, 0);
 
             if (selectedAccount != "") {
-                Withdraw wd = new Withdraw(parentFrame, this, selectedAccount);
+                WithdrawForm wd = new WithdrawForm(parentFrame, this, selectedAccount);
 
                 wd.setBounds(430, 15, 275, 140);
                 wd.show();

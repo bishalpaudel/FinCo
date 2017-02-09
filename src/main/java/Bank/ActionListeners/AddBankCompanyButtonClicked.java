@@ -1,7 +1,7 @@
 package Bank.ActionListeners;
 
 import Bank.Types.AccountType;
-import Bank.Views.Dialogs.AddCompanyAccount;
+import Bank.Views.Dialogs.CompanyForm;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Singletons.InstanceManager;
@@ -25,7 +25,7 @@ public class AddBankCompanyButtonClicked implements ActionListener, IDataAccessV
     }
 
     public void actionPerformed(ActionEvent event) {
-        AddCompanyAccount pac = new AddCompanyAccount(parentFrame, this);
+        CompanyForm pac = new CompanyForm(parentFrame, this);
         pac.setBounds(450, 20, 300, 330);
         pac.show();
     }

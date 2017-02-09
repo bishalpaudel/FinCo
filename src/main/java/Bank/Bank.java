@@ -101,11 +101,11 @@ public class Bank extends FinCo{
         JPanel1.add(JButton_CompAC);
         JButton_CompAC.setBounds(240,20,192,33);
 
-        JButton_Deposit.setText("Deposit");
+        JButton_Deposit.setText("DepositForm");
         JPanel1.add(JButton_Deposit);
         JButton_Deposit.setBounds(468,104,150,33);
 
-        JButton_Withdraw.setText("Withdraw");
+        JButton_Withdraw.setText("WithdrawForm");
         JPanel1.add(JButton_Withdraw);
         JButton_Withdraw.setBounds(468,164,150,33);
 

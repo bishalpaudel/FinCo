@@ -29,7 +29,7 @@ public class WithdrawFom extends JDialog
 		// what Visual Cafe can generate, or Visual Cafe may be unable to back
 		// parse your Java file into its visual environment.
 
-		setTitle("Withdraw");
+		setTitle("WithdrawForm");
 		setModal(true);
 		getContentPane().setLayout(null);
 		setSize(277,134);

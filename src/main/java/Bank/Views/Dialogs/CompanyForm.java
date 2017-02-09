@@ -7,12 +7,12 @@ import java.awt.*;
 import java.util.HashMap;
 
 
-public class AddCompanyAccount extends JDialog
+public class CompanyForm extends JDialog
 {
     private JFrame parentframe;
     private IDataAccessView controller;
 
-	public AddCompanyAccount(JFrame parent, IDataAccessView controller)
+	public CompanyForm(JFrame parent, IDataAccessView controller)
 	{
 		super(parent);
 		parentframe=parent;
