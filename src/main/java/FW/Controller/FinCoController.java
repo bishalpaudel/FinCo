@@ -1,5 +1,6 @@
 package FW.Controller;
 
+import FW.Command.*;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Observers.ICustomerChangeObserver;
@@ -21,38 +22,64 @@ import java.util.List;
 public class FinCoController {
 
     public void addInterestToAllAccounts() {
-        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
-        for(IAccount account : accounts){
-            account.generateInterest();
-        }
+
+        IActionCommand addInterestCommand = new AddInterestCommand(new ActionExecuter());
+        CommandManager commandManager = new CommandManager(addInterestCommand);
+        commandManager.invoke();
+
+//        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
+//        for(IAccount account : accounts){
+//            account.generateInterest();
+//        }
     }
 
     public void generateReport() {
-        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
-        for(IAccount account : accounts){
-            IReport report= new MonthlyBillingReport(account);
-            ReportGenerator reportGenerator = new ReportGenerator(report);
-            reportGenerator.generate();
-        }
+        IActionCommand generateReportCommand = new GenerateReportCommand(new ActionExecuter());
+        CommandManager commandManager = new CommandManager(generateReportCommand);
+        commandManager.invoke();
+
+
+//        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
+//        for(IAccount account : accounts){
+//            IReport report= new MonthlyBillingReport(account);
+//            ReportGenerator reportGenerator = new ReportGenerator(report);
+//            reportGenerator.generate();
+//        }
     }
 
 
     public void addAccount(ICustomer customer, IAccount account){
-        String accountNum = account.getAccountNumber();
+
+        IActionCommand addAccountCommand = new AddAccountCommand(new ActionExecuter(), customer, account);
+        CommandManager commandManager = new CommandManager(addAccountCommand);
+        commandManager.invoke();
         notifyObservers(customer, account);
-        customer.addAccount(account);
-        account.setCustomer(customer);
-        InstanceManager.getDAO().addCutomer(customer);
+
+//        String accountNum = account.getAccountNumber();
+//
+//        customer.addAccount(account);
+//        account.setCustomer(customer);
+//        InstanceManager.getDAO().addCutomer(customer);
     }
 
     public void deposit(IAccount account, double amountDeposit) {
-        IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), amountDeposit);
-        account.addEntry(entry);
+
+        IActionCommand depositCommand = new DepositCommand(new ActionExecuter(), account, amountDeposit);
+        CommandManager commandManager = new CommandManager(depositCommand);
+        commandManager.invoke();
+
+//        IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), amountDeposit);
+//        account.addEntry(entry);
     }
 
     public void withdraw(IAccount account, double amountWithdraw) {
-        IEntry entry = new Entry(EntryType.WITHDRAW, new Date().toString(), amountWithdraw);
-        account.addEntry(entry);
+
+        IActionCommand withdrawCommand = new WithdrawCommand(new ActionExecuter(), account, amountWithdraw);
+        CommandManager commandManager = new CommandManager(withdrawCommand);
+        commandManager.invoke();
+
+//        IEntry entry = new Entry(EntryType.WITHDRAW, new Date().toString(), amountWithdraw);
+//        account.addEntry(entry);
     }
 
 

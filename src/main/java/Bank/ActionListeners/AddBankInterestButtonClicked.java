@@ -1,5 +1,9 @@
 package Bank.ActionListeners;
 
+import FW.Command.ActionExecuter;
+import FW.Command.AddInterestCommand;
+import FW.Command.CommandManager;
+import FW.Command.IActionCommand;
 import FW.FinCo;
 import FW.Singletons.InstanceManager;
 import FW.Views.IDataAccessView;
@@ -20,6 +24,8 @@ public class AddBankInterestButtonClicked implements ActionListener, IDataAccess
     }
 
     public void actionPerformed(ActionEvent event) {
+
+
         InstanceManager.getControllerInstance().addInterestToAllAccounts();
     }
 
