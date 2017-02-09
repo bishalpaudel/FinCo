@@ -38,6 +38,8 @@ public abstract class Account implements  IAccount {
 
     public abstract Double getBalance();
 
+    private String expiryDate;
+
     public Boolean withdraw(IEntry withdraw) {
 
 
@@ -89,4 +91,12 @@ public abstract class Account implements  IAccount {
     }
 
     public abstract void generateInterest();
+
+    public String getExpDate() {
+        return expiryDate;
+    }
+
+    public void setExpDate(String expiryDate) {
+        this.expiryDate = expiryDate;
+    }
 }

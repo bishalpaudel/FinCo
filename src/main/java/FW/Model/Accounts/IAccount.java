@@ -28,4 +28,8 @@ public interface IAccount {
      void generateReport(IReport report);
 
     void generateInterest();
+
+    public String getExpDate();
+
+    public void setExpDate(String expiryDate);
 }
