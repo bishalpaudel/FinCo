@@ -72,7 +72,7 @@ public class AddBankCompanyButtonClicked implements ActionListener, IDataAccessV
 //	   else
 //           accountType = "S";
 
-        InstanceManager.getAppInstance().addAccount(customer, account);
+        InstanceManager.getControllerInstance().addAccount(customer, account);
     }
 
     public JFrame getParentFrame(){

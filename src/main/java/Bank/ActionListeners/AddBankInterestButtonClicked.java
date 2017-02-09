@@ -20,7 +20,7 @@ public class AddBankInterestButtonClicked implements ActionListener, IDataAccess
     }
 
     public void actionPerformed(ActionEvent event) {
-        InstanceManager.getAppInstance().addInterestToAllAccounts();
+        InstanceManager.getControllerInstance().addInterestToAllAccounts();
     }
 
     public void setData(HashMap<String, String> data){

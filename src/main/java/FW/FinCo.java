@@ -1,5 +1,6 @@
 package FW;
 
+import FW.Controller.FinCoController;
 import FW.DAO.SimpleDAO;
 import FW.Factories.IFactory;
 import FW.Factories.DefaultFactory;
@@ -46,9 +47,6 @@ public class FinCo extends JFrame{
 
 
 
-    public void setFactory(IFactory factory) {
-        InstanceManager.setFactoryInstance(factory);
-    }
     /*****************************************************
      * The entry point for this application.
      * Sets the Look and Feel to the System Look and Feel.
@@ -103,7 +101,7 @@ public class FinCo extends JFrame{
         JScrollPane1.setBounds(12,92,444,160);
         myModel = new DefaultTableModel();
         JTable1 = new CustomersTableView(myModel);
-        attachAccountChangeObserver((ICustomerChangeObserver) JTable1);
+        InstanceManager.getControllerInstance().attachAccountChangeObserver((ICustomerChangeObserver) JTable1);
         JTable1.setBounds(0, 0, 420, 0);
         JScrollPane1.getViewport().add(JTable1);
 
@@ -201,22 +199,6 @@ public class FinCo extends JFrame{
     }
 
 
-    public void addInterestToAllAccounts() {
-        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
-        for(IAccount account : accounts){
-            account.generateInterest();
-        }
-    }
-
-    public void generateReport() {
-        List<IAccount> accounts = InstanceManager.getDAO().getAccounts();
-        for(IAccount account : accounts){
-            IReport report= new MonthlyBillingReport(account);
-            ReportGenerator reportGenerator = new ReportGenerator(report);
-            reportGenerator.generate();
-        }
-    }
-
     public Integer getSelectedIndex(){
         return getListTable().getSelectionModel().getMinSelectionIndex();
     }
@@ -224,38 +206,5 @@ public class FinCo extends JFrame{
     public String getSelectedAccount(){
         int selection = getListTable().getSelectionModel().getMinSelectionIndex();
         return selection >= 0 ? (String) getMyModel().getValueAt(selection, 0) : "";
-    }
-
-
-    public void addAccount(ICustomer customer, IAccount account){
-        String accountNum = account.getAccountNumber();
-        notifyObservers(customer, account);
-        customer.addAccount(account);
-        account.setCustomer(customer);
-        InstanceManager.getDAO().addCutomer(customer);
-    }
-
-    public void deposit(IAccount account, double amountDeposit) {
-        IEntry entry = new Entry(EntryType.DEPOSIT, new Date().toString(), amountDeposit);
-        account.addEntry(entry);
-    }
-
-    public void withdraw(IAccount account, double amountWithdraw) {
-        IEntry entry = new Entry(EntryType.WITHDRAW, new Date().toString(), amountWithdraw);
-        account.addEntry(entry);
-    }
-
-
-    private List<ICustomerChangeObserver> observers = new ArrayList();
-    public void attachAccountChangeObserver(ICustomerChangeObserver observer){
-        observers.add(observer);
-    }
-    public void detachAccountChangeObserver(ICustomerChangeObserver observer){
-        observers.remove(observer);
-    }
-    public void notifyObservers(ICustomer customer, IAccount account){
-        for(ICustomerChangeObserver observer: observers){
-            observer.doUpdate(customer, account);
-        }
     }
 }

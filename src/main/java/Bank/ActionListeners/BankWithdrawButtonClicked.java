@@ -43,7 +43,7 @@ public class BankWithdrawButtonClicked implements ActionListener, IDataAccessVie
     public void setData(HashMap<String, String> data){
         IAccount account = InstanceManager.getDAO().getAccount(selectedAccount);
         if(account != null){
-            InstanceManager.getAppInstance().withdraw(account, Double.parseDouble(data.get("amountWithdraw")));
+            InstanceManager.getControllerInstance().withdraw(account, Double.parseDouble(data.get("amountWithdraw")));
             String balance = String.valueOf(account.getBalance());
             DefaultTableModel model = parentFrame.getMyModel();
             model.setValueAt(balance, selectedIndex, 5);

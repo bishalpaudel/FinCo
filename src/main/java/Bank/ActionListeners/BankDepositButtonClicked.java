@@ -41,7 +41,7 @@ public class BankDepositButtonClicked implements ActionListener, IDataAccessView
 
     public void setData(HashMap<String, String> data){
         IAccount account = InstanceManager.getDAO().getAccount(selectedAccount);
-        InstanceManager.getAppInstance().deposit(account, Double.parseDouble(data.get("amountDeposit")));
+        InstanceManager.getControllerInstance().deposit(account, Double.parseDouble(data.get("amountDeposit")));
         String balance = String.valueOf(account.getBalance());
         DefaultTableModel model = parentFrame.getMyModel();
         model.setValueAt(balance, selectedIndex, 5);

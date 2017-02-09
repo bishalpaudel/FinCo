@@ -20,7 +20,7 @@ public class MonthlyReportButtonClicked implements ActionListener, IDataAccessVi
     }
 
     public void actionPerformed(ActionEvent event) {
-        InstanceManager.getAppInstance().generateReport();
+        InstanceManager.getControllerInstance().generateReport();
     }
 
     public void setData(HashMap<String, String> data){

@@ -1,5 +1,6 @@
 package FW.Singletons;
 
+import FW.Controller.FinCoController;
 import FW.DAO.DAO;
 import FW.DAO.SimpleDAO;
 import FW.Factories.IFactory;
@@ -10,6 +11,7 @@ import FW.FinCo;
  */
 public class InstanceManager {
     private static FinCo appInstance = null;
+    private static FinCoController controllerInstance = null;
     private static DAO DAOInstance = null;
     private static IFactory factoryInstance = null;
 
@@ -26,6 +28,17 @@ public class InstanceManager {
             appInstance = new FinCo();
         }
         return appInstance;
+    }
+
+    public static void setControllerInstance(FinCoController controller) {
+        controllerInstance = controller;
+    }
+
+    public static FinCoController getControllerInstance() {
+        if (controllerInstance == null) {
+            controllerInstance = new FinCoController();
+        }
+        return controllerInstance;
     }
 
 

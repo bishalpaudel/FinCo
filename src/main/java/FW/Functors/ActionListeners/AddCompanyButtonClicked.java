@@ -72,7 +72,7 @@ public class AddCompanyButtonClicked implements java.awt.event.ActionListener, I
 //	   else
 //           accountType = "S";
 
-        InstanceManager.getAppInstance().addAccount(customer, account);
+        InstanceManager.getControllerInstance().addAccount(customer, account);
     }
 
     public JFrame getParentFrame(){

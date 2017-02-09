@@ -65,7 +65,7 @@ public class AddBankPersonButtonClicked implements ActionListener, IDataAccessVi
         customer.setZip(data.get("zip"));
         customer.setState(data.get("state"));
 
-        InstanceManager.getAppInstance().addAccount(customer, account);
+        InstanceManager.getControllerInstance().addAccount(customer, account);
     }
 
     public JFrame getParentFrame(){

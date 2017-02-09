@@ -55,7 +55,7 @@ public class AddPersonButtonClicked implements ActionListener, IDataAccessView {
         customer.setState(data.get("state"));
         customer.setEmail(data.get("email"));
 
-        InstanceManager.getAppInstance().addAccount(customer, account);
+        InstanceManager.getControllerInstance().addAccount(customer, account);
     }
 
     public JFrame getParentFrame(){
