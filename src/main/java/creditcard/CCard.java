@@ -10,6 +10,7 @@ import FW.Observers.ICustomerChangeObserver;
 import FW.Singletons.InstanceManager;
 import creditcard.ActionListeners.AddCCardAccountButtonClicked;
 import creditcard.ActionListeners.CCardDepositButtonClicked;
+import creditcard.ActionListeners.CCardMonthlyReportButtonClicked;
 import creditcard.ActionListeners.CCardWithdrawButtonClicked;
 import creditcard.Factories.CCardFactory;
 import creditcard.Views.CCAccountTableView;
@@ -118,9 +119,10 @@ public class CCard extends FinCo {
         SymAction lSymAction = new SymAction();
         JButton_Exit.addActionListener(lSymAction);
         JButton_NewCCAccount.addActionListener(new AddCCardAccountButtonClicked(this));
-        JButton_GenBill.addActionListener(lSymAction);
+        JButton_GenBill.addActionListener(new CCardMonthlyReportButtonClicked(this));
         JButton_Deposit.addActionListener(new CCardDepositButtonClicked(this));
         JButton_Withdraw.addActionListener(new CCardWithdrawButtonClicked(this));
+        //JButton_Withdraw.addActionListener(new CCardWithdrawButtonClicked(this));
 
     }
 

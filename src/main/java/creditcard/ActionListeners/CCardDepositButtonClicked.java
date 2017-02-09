@@ -28,7 +28,7 @@ public class CCardDepositButtonClicked implements ActionListener, IDataAccessVie
         // get selected name
         selectedIndex = parentFrame.getSelectedIndex();
         if(selectedIndex >= 0){
-            selectedAccount = (String) parentFrame.getMyModel().getValueAt(selectedIndex, 0);
+            selectedAccount = (String) parentFrame.getMyModel().getValueAt(selectedIndex, 1);
             if (selectedAccount != ""){
                 DepositForm wd = new DepositForm(parentFrame, this, selectedAccount);
 

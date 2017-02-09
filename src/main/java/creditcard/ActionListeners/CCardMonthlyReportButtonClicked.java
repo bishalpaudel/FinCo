@@ -25,6 +25,8 @@ public class CCardMonthlyReportButtonClicked implements ActionListener, IDataAcc
 
     public void setData(HashMap<String, String> data){
         //just for interface
+
+        System.out.println("This is very");
     }
 
     public JFrame getParentFrame(){
