@@ -54,24 +54,6 @@ public class AddBankCompanyButtonClicked implements ActionListener, IDataAccessV
         customer.setZip(data.get("zip"));
         customer.setState(data.get("state"));
 
-
-
-//        person.setName(JTextField_NAME.getText());
-//        person.setStreet(JTextField_STR.getText());
-//        person.setCity(JTextField_CT.getText());
-//        person.setZip(JTextField_ZIP.getText());
-//        person.setState(JTextField_ST.getText());
-
-//       clientName = JTextField_NAME.getText();
-//       street = JTextField_STR.getText();
-//       city = JTextField_CT.getText();
-//       zip = JTextField_ZIP.getText();
-//       state = JTextField_ST.getText();
-//       if (JRadioButton_Chk.isSelected())
-//           accountType = "Ch";
-//	   else
-//           accountType = "S";
-
         InstanceManager.getControllerInstance().addAccount(customer, account);
     }
 

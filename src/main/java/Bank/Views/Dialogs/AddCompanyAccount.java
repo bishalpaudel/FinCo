@@ -155,19 +155,6 @@ public class AddCompanyAccount extends JDialog
             data.put("accountType", "Savings");
         }
 
-//        object.acnr = JTextField_ACNR.getText();
-//        parentframe.clientName=JTextField_NAME.getText();
-//        parentframe.street=JTextField_STR.getText();
-//        parentframe.city=JTextField_CT.getText();
-//        parentframe.zip=JTextField_ZIP.getText();
-//        parentframe.state=JTextField_ST.getText();
-//        if (JRadioButton_Chk.isSelected()) {
-//           parentframe.accountType="Ch";
-//       }
-//           else {
-//           parentframe.accountType="S";
-//       }
-//        parentframe.newaccount=true;
 	   controller.setData(data);
 
 	   dispose();
