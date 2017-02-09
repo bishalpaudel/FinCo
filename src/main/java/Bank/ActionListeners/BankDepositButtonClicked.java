@@ -2,7 +2,6 @@ package Bank.ActionListeners;
 
 import Bank.Views.Dialogs.Deposit;
 import FW.FinCo;
-import FW.Views.Dialogs.JDialog_Deposit;
 import FW.Model.Accounts.IAccount;
 import FW.Singletons.InstanceManager;
 import FW.Views.IDataAccessView;

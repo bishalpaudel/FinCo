@@ -8,12 +8,12 @@ import java.awt.*;
 import java.util.HashMap;
 import javax.swing.*;
 
-public class JDialog_AddPAcc extends JDialog
+public class PersonForm extends JDialog
 {
     private JFrame parentframe;
     private IDataAccessView controller;
 
-    public JDialog_AddPAcc(JFrame parent, IDataAccessView controller)
+    public PersonForm(JFrame parent, IDataAccessView controller)
     {
         super(parent);
         parentframe=parent;

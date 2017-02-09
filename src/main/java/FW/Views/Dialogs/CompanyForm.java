@@ -8,12 +8,12 @@ import javax.swing.*;
 
 
 
-public class JDialog_AddCompAcc extends JDialog
+public class CompanyForm extends JDialog
 {
     private JFrame parentframe;
     private IDataAccessView controller;
 
-	public JDialog_AddCompAcc(JFrame parent, IDataAccessView controller)
+	public CompanyForm(JFrame parent, IDataAccessView controller)
 	{
 		super(parent);
 		parentframe=parent;

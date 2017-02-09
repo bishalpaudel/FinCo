@@ -1,8 +1,7 @@
 package FW.Functors.ActionListeners;
 
-import Bank.Views.Dialogs.Deposit;
 import FW.FinCo;
-import FW.Views.Dialogs.JDialog_Deposit;
+import FW.Views.Dialogs.DepositForm;
 import FW.Model.Accounts.IAccount;
 import FW.Singletons.InstanceManager;
 import FW.Views.IDataAccessView;
@@ -33,7 +32,7 @@ public class DepositButtonClicked implements ActionListener, IDataAccessView {
         if(selectedIndex >= 0){
             selectedAccount = (String) parentFrame.getMyModel().getValueAt(selectedIndex, 0);
             if (selectedAccount != ""){
-                JDialog_Deposit wd = new JDialog_Deposit(parentFrame, this, selectedAccount);
+                DepositForm wd = new DepositForm(parentFrame, this, selectedAccount);
 
                 wd.setBounds(430, 15, 275, 140);
                 wd.show();

@@ -1,7 +1,7 @@
 package FW.Functors.ActionListeners;
 
 import FW.FinCo;
-import FW.Views.Dialogs.JDialog_Withdraw;
+import FW.Views.Dialogs.WithdrawFom;
 import FW.Model.Accounts.IAccount;
 import FW.Singletons.InstanceManager;
 import FW.Views.IDataAccessView;
@@ -31,7 +31,7 @@ public class WithdrawButtonClicked implements ActionListener, IDataAccessView {
             selectedAccount = parentFrame.getSelectedAccount();
 
             if (selectedAccount != "") {
-                JDialog_Withdraw wd = new JDialog_Withdraw(parentFrame, this, selectedAccount);
+                WithdrawFom wd = new WithdrawFom(parentFrame, this, selectedAccount);
 
                 wd.setBounds(430, 15, 275, 140);
                 wd.show();

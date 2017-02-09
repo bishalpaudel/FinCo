@@ -1,6 +1,6 @@
 package FW.Functors.ActionListeners;
 
-import FW.Views.Dialogs.JDialog_AddPAcc;
+import FW.Views.Dialogs.PersonForm;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Singletons.InstanceManager;
@@ -25,7 +25,7 @@ public class AddPersonButtonClicked implements ActionListener, IDataAccessView {
 
     public void actionPerformed(ActionEvent event) {
 //        FinCo finCoForm=null;
-        JDialog_AddPAcc pac = new JDialog_AddPAcc(parentFrame, this);
+        PersonForm pac = new PersonForm(parentFrame, this);
         pac.setBounds(450, 20, 300, 330);
         pac.show();
 

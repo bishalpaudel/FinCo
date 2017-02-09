@@ -1,6 +1,6 @@
 package FW.Functors.ActionListeners;
 
-import FW.Views.Dialogs.JDialog_AddCompAcc;
+import FW.Views.Dialogs.CompanyForm;
 import FW.Model.Accounts.IAccount;
 import FW.Model.Customer.ICustomer;
 import FW.Singletons.InstanceManager;
@@ -24,7 +24,7 @@ public class AddCompanyButtonClicked implements java.awt.event.ActionListener, I
 
     public void actionPerformed(ActionEvent event) {
 //        FinCo finCoForm=null;
-        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(parentFrame, this);
+        CompanyForm pac = new CompanyForm(parentFrame, this);
         pac.setBounds(450, 20, 300, 330);
         pac.show();
 
