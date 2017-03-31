@@ -56,7 +56,7 @@ This pattern is used to notify views of any change in the accounts or customers.
 See also the list of [contributors](https://github.com/bishalpaudel/FinCo/contributors) who participated in this project.
 
 ## Disclaimer
-This project is created for educational and learning purposes only. Until this time, this project cannot be used for professional works. We hope to continue and improve this project in the future.
+This project is created for educational and learning purposes only. Until this time, this project cannot be used for commercial purposes. We hope to continue and improve this project in the future.
 
 ## License
 
