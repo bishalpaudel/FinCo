@@ -8,7 +8,7 @@ A simple framework that provides abstraction for financial applications such as 
 
 ## Getting Started
 
-To run this project, simply download the repository and run `FinCo.java`.
+To run this project, simply clone the repository and run `FinCo.java`.
 
 ### Prerequisites
 
@@ -35,10 +35,10 @@ This pattern facilitates the iteration of a list of customers from DAO.
 #### Command Pattern (GoF)
 This pattern is used to provide single command like functionality, and undo-redo (TODO, not yet implemented here) features. It provides the abstraction for actions such as add account, add interest, deposit money, withdraw money, etc.
 
-####Strategy Pattern (GoF)
+#### Strategy Pattern (GoF)
 This pattern provides the choice of strtegy for different types of report generation such as monthly billing report, account summary report, etc.
 
-####Observer Pattern (GoF)
+#### Observer Pattern (GoF)
 This pattern is used to notify views of any change in the accounts or customers.
 
 ## Built With
@@ -56,7 +56,7 @@ This pattern is used to notify views of any change in the accounts or customers.
 See also the list of [contributors](https://github.com/bishalpaudel/FinCo/contributors) who participated in this project.
 
 ## Disclaimer
-This project is created for educational and learning purposes only. Until this time, this project cannot be utilized for professional works. We hope to continue this project in the future.
+This project is created for educational and learning purposes only. Until this time, this project cannot be used for professional works. We hope to continue and improve this project in the future.
 
 ## License
 
