@@ -4,7 +4,7 @@ Financial Framework
 
 ## Project Description
 
-A simple framework that provides abstraction for financial applications such as bank or credit card company. The UML design is under UML folder. The design provides more details on the struture of the framework.
+A simple framework that provides abstraction for financial applications such as bank or credit card applications. The UML design is under UML folder. The design provides more details on the struture of the framework.
 
 ## Getting Started
 
