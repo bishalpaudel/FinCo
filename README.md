@@ -50,8 +50,8 @@ This pattern is used to notify views of any change in the accounts or customers.
 ## Authors
 
 * **Bishal Paudel** - [BishalPaudel](https://github.com/bishalpaudel)
-* **Akash KC** - [BishalPaudel](https://github.com/bishalpaudel)
-* **Devi Bahadur Khadka** - [BishalPaudel](https://github.com/bishalpaudel)
+* **Akash KC** 
+* **Devi Bahadur Khadka** - [DevKhadka](https://github.com/dbkhadka)
 
 See also the list of [contributors](https://github.com/bishalpaudel/FinCo/contributors) who participated in this project.
 
